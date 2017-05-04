@@ -1,4 +1,4 @@
-﻿using ShowMeMyMoney.Model;
+using ShowMeMyMoney.Model;
 using ShowMeMyMoney.Services;
 using System;
 using System.Collections.Generic;
@@ -19,5 +19,24 @@ namespace ShowMeMyMoney.ViewModel
 
 
         public DBManager dbManager;
+        public ViewModel()
+        {
+            dbManager = new DBManager();
+            synchronizeWithDB();
+        }
+        private async void synchronizeWithDB()
+        {
+            /*  初始载入时连接到数据库，加载数据 */
+        }
+
+        public async void AddAccountItem(accountItem item) {
+            /*  添加item并插入到数据库  */
+        }
+        public async void RemoveAccountItem(string id)
+        {
+
+            /*删除item并同步数据库*/
+
+        }
     }
 }
