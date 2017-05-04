@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,5 +33,14 @@ namespace ShowMeMyMoney.Services
                 statement.Step();
             }
         }
+
+        public void InsertIntoDatabase(Model.accountItem item) {
+
+        }
+        public void DeleteItemInDatabase(string idOfItem)
+        {
+
+        }
+
     }
 }
