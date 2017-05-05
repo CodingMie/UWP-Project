@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShowMeMyMoney.Model
 {
-    public  class accountItem: INotifyPropertyChanged
+    public class accountItem: INotifyPropertyChanged
     {
         private int _category;
         /*  用数字表示分类，这样分类可以改变名字； 
@@ -22,9 +22,16 @@ namespace ShowMeMyMoney.Model
         private string _description;
         /* 对该项记录的详细描述 */
         private string _id;
+        
+
         /* 主码 */
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        protected void RaisePropertyChanged(string name)
+        {
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
         public string id { get; }
 
