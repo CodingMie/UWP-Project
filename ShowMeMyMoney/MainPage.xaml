@@ -1,13 +1,80 @@
 ﻿<Page
-    x:Class="ShowMeMyMoney.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ShowMeMyMoney"
+    xmlns:md="using:ShowMeMyMoney.Model"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Class="ShowMeMyMoney.MainPage"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Total" FontSize="40" HorizontalAlignment="Center" ></TextBlock>
+ 
+            <ListView  IsItemClickEnabled="False" 
+                         ItemsSource="{x:Bind categoryTable, Mode=OneWay}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Width="400"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="md:categoryItem"> 
+                            <Rectangle Fill="{x:Bind color}" Width="{x:Bind share}" Height="30"/> 
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <ListView ItemClick="ShowCategory_Click" IsItemClickEnabled="True"
+                         ItemsSource="{x:Bind categoryTable, Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="md:categoryItem">
+                        <StackPanel Orientation="Horizontal">
+                            <Border BorderBrush="{x:Bind color}" BorderThickness="1" 
+                                  VerticalAlignment="Top"     Width="Auto">
+                            <TextBlock Text="{x:Bind name}" Foreground="{x:Bind color}"
+                                       VerticalAlignment="Center"/>
+
+                        </Border>
+                            <TextBlock>     ----    点我查看分类开支详情</TextBlock>
+                            <AppBarButton Icon="Comment"  
+                               x:Name="ShowCategoryDetails"
+                              Width="89"></AppBarButton>
+                        </StackPanel>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            
+            <StackPanel Orientation="Horizontal">
+
+                 
+            </StackPanel>
+
+
+            <AppBarButton x:Name="AddNewCategoryButton" Label="添加新分类"
+                          Click="AddNewCategoryButton_Click"
+                     Icon="Add" Width="117"></AppBarButton>
+
+            
+            <AppBarButton x:Name="AddNewAccountButton" Label="添加新记录"
+                          Click="AddNewAccountButton_Click"
+                     Icon="Add" Width="109"></AppBarButton>
+        </StackPanel>
+        <ContentDialog x:Name="AddNewCategoryDialog" Title="添加新分类~\(≧▽≦)/~"
+                       PrimaryButtonText="确认"
+                       SecondaryButtonText="取消"
+                     PrimaryButtonClick="AddNewCategoryDialog_PrimaryButtonClick"
+                       SecondaryButtonClick="AddNewCategoryDialog_SecondaryButtonClick" Margin="0,421,40,-88">
+            <StackPanel> 
+                <TextBox x:Name="categoryName" Header="# 分类名称" />
+                <TextBox x:Name="categoryShare" Header="# 所占预算比例（百分比数值，1-100）" />
+                <TextBox x:Name="categoryColor" Header="# 分类颜色（英语,例：Red）" />
+                
+            </StackPanel>
+        </ContentDialog>
 
     </Grid>
 </Page>
