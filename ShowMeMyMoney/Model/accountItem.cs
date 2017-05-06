@@ -25,6 +25,17 @@ namespace ShowMeMyMoney.Model
         
 
         /* 主码 */
+        public accountItem(int category, DateTimeOffset date, double amount,
+                            bool isPocketMoney, bool inOrOut, string description)
+        {
+            _category = category;
+            _createDate = date;
+            _amount = amount;
+            _isPocketMoney = isPocketMoney;
+            _inOrOut = inOrOut;
+            _description = description;
+            _id = Guid.NewGuid().ToString();
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

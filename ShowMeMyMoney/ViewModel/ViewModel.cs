@@ -17,7 +17,8 @@ namespace ShowMeMyMoney.ViewModel
         private accountItem selectedItem = default(accountItem);
         public accountItem SelectedItem { get { return selectedItem; } set { this.selectedItem = value; } }
 
-
+        public ObservableCollection<categoryItem> AllCatagoryItem = new ObservableCollection<categoryItem>();
+        public ObservableCollection<string> allCategoryName = new ObservableCollection<string>();
         public DBManager dbManager;
         public ViewModel()
         {
@@ -28,9 +29,28 @@ namespace ShowMeMyMoney.ViewModel
             /*  初始载入时连接到数据库，加载数据 */
         }
 
-        public async void AddAccountItem(accountItem item) {
-            /*  添加item并插入到数据库  */
+        /* public async void AddAccountItem(accountItem item) {
+             /*  添加item并插入到数据库  */
+
+        //}
+        public async void AddAccountItem(string category, DateTimeOffset date, double amount, 
+                            bool isPocketMoney, bool inOrOut, string description)
+        {
+            int categoryNum=0;
+            foreach (categoryItem item in AllCatagoryItem)
+            {
+                if (item.name == category)
+                {
+                    categoryNum = item.number;
+                }
+            }
+            accountItem accountItem = new accountItem(categoryNum, date, amount, isPocketMoney, inOrOut, description);
+            allItems.Add(accountItem);
+            /*
+                add to database
+             */
         }
+
         public async void RemoveAccountItem(string id)
         {
 

@@ -179,7 +179,7 @@ namespace ShowMeMyMoney
         private void AddNewAccountButton_Click(object sender, RoutedEventArgs e)
         {
 
-            Frame.Navigate(typeof(NewPage));
+            Frame.Navigate(typeof(Account));
         }
     }
 
