@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8BB9FFDE-08A9-4B2C-B4B8-4DE6069402C3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyUWPToolkit</RootNamespace>
+    <AssemblyName>MyUWPToolkit</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Button\HightLightedRadioButton.cs" />
+    <Compile Include="Chart\ColumnChart.cs" />
+    <Compile Include="CollectionView\ICollectionViewEx.cs" />
+    <Compile Include="CollectionView\UWPCollectionView.cs" />
+    <Compile Include="ColorPicker\ColorButton.cs" />
+    <Compile Include="ColorPicker\ColorChangedEventHandler.cs" />
+    <Compile Include="ColorPicker\ColorPickerColorHelper.cs" />
+    <Compile Include="ColorPicker\ColorPicker.cs" />
+    <Compile Include="ColorPicker\ColorPickerItemsControl.cs" />
+    <Compile Include="ColorPicker\ColorPickerP.cs" />
+    <Compile Include="ColorPicker\TransparentBackground.cs" />
+    <Compile Include="Common\ApplicationDataContainerExtensions.cs" />
+    <Compile Include="Common\BindingEvaluator.cs" />
+    <Compile Include="Common\Calculator.cs" />
+    <Compile Include="Common\ColorConverter.cs" />
+    <Compile Include="Common\Enums.cs" />
+    <Compile Include="Common\FrameworkElementExtensions.cs" />
+    <Compile Include="Common\PropertyChangeEventSource.cs" />
+    <Compile Include="Common\SpeechHelper.cs" />
+    <Compile Include="Common\StorageHelper.cs" />
+    <Compile Include="Converters\Converter.cs" />
+    <Compile Include="FlexGrid\Column.cs" />
+    <Compile Include="FlexGrid\FlexGrid.cs" />
+    <Compile Include="FlexGrid\FlexGridItem.cs" />
+    <Compile Include="FlexGrid\FlexGridItemFrozenContent.cs" />
+    <Compile Include="FlexGrid\FlexGridP.cs" />
+    <Compile Include="FlexGrid\NewFlexGrid.cs" />
+    <Compile Include="FlexGrid\NewFlexGridFrozenRows.cs" />
+    <Compile Include="FlexGrid\NewFlexGridHeader.cs" />
+    <Compile Include="ImageControl\AspectRatio.cs" />
+    <Compile Include="ImageControl\BitmapHelper.cs" />
+    <Compile Include="ImageControl\Crop\CropImageControl.cs" />
+    <Compile Include="ImageControl\Crop\CropImageSourceChangedEventHandler.cs" />
+    <Compile Include="ImageControl\ImageTool.cs" />
+    <Compile Include="ImageControl\CropSelection.cs" />
+    <Compile Include="ImageControl\CropSelectionSize.cs" />
+    <Compile Include="ImageControl\RotationAngle.cs" />
+    <Compile Include="ImageControl\Win2DImageTool.cs" />
+    <Compile Include="ItemsControl\GroupListView\Class1.cs" />
+    <Compile Include="ItemsControl\GroupListView\ExpressionAnimationItem.cs" />
+    <Compile Include="ItemsControl\GroupListView\GroupListView.cs" />
+    <Compile Include="ItemsControl\GroupListView\GroupListView1.cs" />
+    <Compile Include="ItemsControl\GroupListView\GroupListViewItem.cs" />
+    <Compile Include="ItemsControl\GroupListView\GroupObservableCollection.cs" />
+    <Compile Include="ItemsControl\GroupListView\IGroupCollection.cs" />
+    <Compile Include="Panel\PullToRefresh\PullToRefreshBorder.cs" />
+    <Compile Include="Panel\PullToRefresh\PullToRefreshControl.cs" />
+    <Compile Include="Panel\PullToRefresh\PullToRefreshGrid.cs" />
+    <Compile Include="Panel\PullToRefresh\PullToRefreshPanel.cs" />
+    <Compile Include="Panel\PullToRefresh\ScrollPanel.cs" />
+    <Compile Include="Panel\VariableSizedGrid\IResizable.cs" />
+    <Compile Include="Panel\VariableSizedGrid\ObservableRowAapter.cs" />
+    <Compile Include="Panel\VariableSizedGrid\VariableSizedGridView.cs" />
+    <Compile Include="Panel\VariableSizedGrid\VariableSizedWrapGridDataContext.cs" />
+    <Compile Include="Panel\VariableSizedGrid\VirtualizedVariableSizedGridView.cs" />
+    <Compile Include="Panel\VariableSizedGrid\VirtualizedVariableSizedWrapGrid.cs" />
+    <Compile Include="Popup\AdvancedFlyout.cs" />
+    <Compile Include="Popup\AdvancedFlyoutBase.cs" />
+    <Compile Include="Popup\AdvancedFlyoutPlacementMode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Text\NumericTextBox.cs" />
+    <Compile Include="Text\NumericUpDown.cs" />
+    <Compile Include="Text\UpDownTextBox.cs" />
+    <Compile Include="Util\AudioCapturePermissions.cs" />
+    <Compile Include="Util\CryptographyHelper.cs" />
+    <Compile Include="Util\DeviceInfo.cs" />
+    <Compile Include="Util\IEnumerableExtensions.cs" />
+    <Compile Include="Util\ItemsControlExtensions.cs" />
+    <Compile Include="Util\NetworkInfo.cs" />
+    <Compile Include="Util\NotifyTaskCompletion.cs" />
+    <Compile Include="Util\PlatformIndependent.cs" />
+    <Compile Include="Util\SpeechService.cs" />
+    <Compile Include="Util\Util.cs" />
+    <EmbeddedResource Include="Properties\MyUWPToolkit.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\ColumnChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\CropImageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\DeviceFamily-Mobile\FlexGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\DeviceFamily-Mobile\VirtualizedVariableSizedGridView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\GroupListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\FlexGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\HightLightedRadioButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\ImageTool.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\ColorPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\NumericUpDown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\PullToRefreshControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\PullToRefreshGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\PullToRefreshPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\VirtualizedVariableSizedGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\Win2DImageTool.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resource\default_ptr_rotate.png" />
+    <Content Include="Resource\indicator_arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.15063.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
