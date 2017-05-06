@@ -11,20 +11,38 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel HorizontalAlignment="Center">
             <TextBlock Text="Total" FontSize="40" HorizontalAlignment="Center" ></TextBlock>
- 
+            <StackPanel x:Name="shareBar" Orientation="Horizontal">
+                <TextBlock/>
+
+            </StackPanel>
+            <!--
             <ListView  IsItemClickEnabled="False" 
                          ItemsSource="{x:Bind categoryTable, Mode=OneWay}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="Width" Value="Auto"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" Width="400"/>
+                        <VirtualizingStackPanel Orientation="Horizontal"
+                VerticalAlignment="Top"
+                ScrollViewer.HorizontalScrollMode="Enabled"
+                ScrollViewer.VerticalScrollMode="Disabled"/>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="md:categoryItem"> 
-                            <Rectangle Fill="{x:Bind color}" Width="{x:Bind share}" Height="30"/> 
-                    </DataTemplate>
+                <ListView.ItemTemplate >
+                    <DataTemplate x:DataType="md:categoryItem" >
+                        <Grid>
+                            <Rectangle Fill="{x:Bind color}" Width="{x:Bind share}" Height="30"/>
+                        </Grid>
+                            </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            -->
+            
 
             <ListView ItemClick="ShowCategory_Click" IsItemClickEnabled="True"
                          ItemsSource="{x:Bind categoryTable, Mode=OneWay}">
@@ -50,18 +68,18 @@
             
             <StackPanel Orientation="Horizontal">
 
-                 
-            </StackPanel>
-
-
-            <AppBarButton x:Name="AddNewCategoryButton" Label="添加新分类"
+                <AppBarButton x:Name="AddNewCategoryButton" Label="添加新分类"
                           Click="AddNewCategoryButton_Click"
                      Icon="Add" Width="117"></AppBarButton>
 
-            
-            <AppBarButton x:Name="AddNewAccountButton" Label="添加新记录"
+
+                <AppBarButton x:Name="AddNewAccountButton" Label="添加新记录"
                           Click="AddNewAccountButton_Click"
                      Icon="Add" Width="109"></AppBarButton>
+
+            </StackPanel>
+
+
         </StackPanel>
         <ContentDialog x:Name="AddNewCategoryDialog" Title="添加新分类~\(≧▽≦)/~"
                        PrimaryButtonText="确认"
