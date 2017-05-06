@@ -12,7 +12,7 @@ namespace ShowMeMyMoney.ViewModel
     public class ViewModel
     {
         private ObservableCollection<accountItem> allItems = new ObservableCollection<accountItem>();
-        public ObservableCollection<accountItem> AllItems { get { return this.allItems; } }
+        public ObservableCollection<accountItem> AllItems { get { return this.allItems; } set { this.allItems = value; } }
 
         private accountItem selectedItem = default(accountItem);
         public accountItem SelectedItem { get { return selectedItem; } set { this.selectedItem = value; } }
@@ -21,10 +21,9 @@ namespace ShowMeMyMoney.ViewModel
         public DBManager dbManager;
         public ViewModel()
         {
-            dbManager = new DBManager();
-            synchronizeWithDB();
+            dbManager = new DBManager(); 
         }
-        private async void synchronizeWithDB()
+        public async void getItemsFromDB(categoryItem ci)
         {
             /*  初始载入时连接到数据库，加载数据 */
         }

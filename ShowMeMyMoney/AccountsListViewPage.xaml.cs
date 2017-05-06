@@ -38,6 +38,8 @@ namespace ShowMeMyMoney
             if (e.Parameter.GetType() == typeof(categoryItem))
             {
                 this.ListCategory = (categoryItem)(e.Parameter);
+                /* 根据指定分类去数据库取出数据 */
+                 ViewModel.getItemsFromDB(ListCategory);
             }
             
 
