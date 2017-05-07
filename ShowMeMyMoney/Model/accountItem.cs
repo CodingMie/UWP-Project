@@ -37,6 +37,10 @@ namespace ShowMeMyMoney.Model
             _id = Guid.NewGuid().ToString();
         }
 
+        public accountItem()
+        {
+
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void RaisePropertyChanged(string name)

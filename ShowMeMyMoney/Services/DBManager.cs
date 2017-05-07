@@ -85,7 +85,7 @@ namespace ShowMeMyMoney.Services
 
 
                     int k = 0;
-                    i.id = (string)statement[k++];
+                   // i.id = (string)statement[k++];
                     i.amount = (double)statement[k++];
                     i.createDate = DateTimeOffset.Parse((string)statement[k++]);
                     i.category = (int)statement[k++];

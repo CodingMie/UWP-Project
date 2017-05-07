@@ -31,6 +31,7 @@ namespace ShowMeMyMoney
         public MainPage()
         {
             this.InitializeComponent();
+            this.ViewModel = new ShowMeMyMoney.ViewModel.ViewModel();
             remainedProportion = 100;
             //    initializeCategoryTable(); 
 
@@ -55,7 +56,16 @@ namespace ShowMeMyMoney
         private ObservableCollection<categoryItem> categoryTable;
         private int categoryCount;
         private double remainedProportion;
+        ViewModel.ViewModel ViewModel { get; set; }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter.GetType() == typeof(ViewModel.ViewModel))
+            {
+                this.ViewModel = ((ViewModel.ViewModel)e.Parameter);
+            }
+            ViewModel.SelectedItem = null;
+        }
         private void ShowCategory_Click(object sender, ItemClickEventArgs e)
         {
             /* 将分类item发送到accountsListViewPage */
@@ -168,7 +178,7 @@ namespace ShowMeMyMoney
             AddNewCategoryDialog.Hide();
             /* 添加shareBar的条条 */
             addShareBar(newCategory);
-
+            ViewModel.AddCategoryItemm(newCategory);
         }
 
         private void AddNewCategoryDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -179,7 +189,7 @@ namespace ShowMeMyMoney
         private void AddNewAccountButton_Click(object sender, RoutedEventArgs e)
         {
 
-            Frame.Navigate(typeof(Account));
+            Frame.Navigate(typeof(Account), ViewModel);
         }
     }
 

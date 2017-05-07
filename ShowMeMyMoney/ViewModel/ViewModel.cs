@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI;
 
 namespace ShowMeMyMoney.ViewModel
 {
@@ -18,11 +19,13 @@ namespace ShowMeMyMoney.ViewModel
         public accountItem SelectedItem { get { return selectedItem; } set { this.selectedItem = value; } }
 
         public ObservableCollection<categoryItem> AllCatagoryItem = new ObservableCollection<categoryItem>();
-        public ObservableCollection<string> allCategoryName = new ObservableCollection<string>();
+       // public ObservableCollection<string> allCategoryName = new ObservableCollection<string>();
         public DBManager dbManager;
         public ViewModel()
         {
-            dbManager = new DBManager(); 
+            dbManager = new DBManager();
+            AllCatagoryItem.Add(new categoryItem("play", 1, "red"));
+      //      public categoryItem(int i, string s, double _share, string c)
         }
         public async void getItemsFromDB(categoryItem ci)
         {
@@ -46,11 +49,17 @@ namespace ShowMeMyMoney.ViewModel
             }
             accountItem accountItem = new accountItem(categoryNum, date, amount, isPocketMoney, inOrOut, description);
             allItems.Add(accountItem);
-            /*
-                add to database
-             */
+            dbManager.InsertIntoDatabase(accountItem);
         }
-
+        public async void AddCategoryItemm(int index, string name, double _share, string color)
+        {
+            categoryItem categoryItem = new categoryItem(index, name, _share, color);
+            AllCatagoryItem.Add(categoryItem);
+        }
+        public async void AddCategoryItemm(categoryItem newCategory)
+        {
+            AllCatagoryItem.Add(newCategory);
+        }
         public async void RemoveAccountItem(string id)
         {
 

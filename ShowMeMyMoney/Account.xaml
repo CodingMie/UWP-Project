@@ -18,7 +18,7 @@
             <Setter Property="RadiusY" Value="20" />
             <Setter Property="Width" Value="60" />
         </Style>
-        <CollectionViewSource x:Name="catelogName" Source="{x:Bind ViewModel.AllCatagoryItem}" />
+        <CollectionViewSource x:Name="categoryName" Source="{x:Bind ViewModel.AllCatagoryItem}" />
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -33,7 +33,7 @@
                     <RadioButton Content="支出" x:Name="out"/>
                     <RadioButton Content="收入" Tag="in" x:Name="in"/>
                 </StackPanel>-->
-                <ComboBox Width="300" ItemsSource="{Binding Source={StaticResource catelogName}, Mode=OneWay}" DisplayMemberPath="name" Header="类型"  HorizontalAlignment="Center" x:Name="Category" Margin="0, 20, 0, 0">
+                <ComboBox Width="300" ItemsSource="{Binding Source={StaticResource categoryName}, Mode=OneWay}" DisplayMemberPath="name" Header="类型"  HorizontalAlignment="Center" x:Name="Category" Margin="0, 20, 0, 0">
                 </ComboBox>
                 <Grid Width="300"  Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
