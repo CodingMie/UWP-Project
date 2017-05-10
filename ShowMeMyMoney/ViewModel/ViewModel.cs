@@ -17,14 +17,11 @@ namespace ShowMeMyMoney.ViewModel
 
         private accountItem selectedItem = default(accountItem);
         public accountItem SelectedItem { get { return selectedItem; } set { this.selectedItem = value; } }
-
-        public ObservableCollection<categoryItem> AllCatagoryItem = new ObservableCollection<categoryItem>();
-       // public ObservableCollection<string> allCategoryName = new ObservableCollection<string>();
         public DBManager dbManager;
         public ViewModel()
         {
             dbManager = new DBManager();
-            AllCatagoryItem.Add(new categoryItem("play", 1, "red"));
+           // AllCatagoryItem.Add(new categoryItem("play", 1, "red"));
       //      public categoryItem(int i, string s, double _share, string c)
         }
         public async void getItemsFromDB(categoryItem ci)
@@ -36,30 +33,14 @@ namespace ShowMeMyMoney.ViewModel
              /*  添加item并插入到数据库  */
 
         //}
-        public async void AddAccountItem(string category, DateTimeOffset date, double amount, 
+        public async void AddAccountItem(int categoryNum, DateTimeOffset date, double amount, 
                             bool isPocketMoney, bool inOrOut, string description)
         {
-            int categoryNum=0;
-            foreach (categoryItem item in AllCatagoryItem)
-            {
-                if (item.name == category)
-                {
-                    categoryNum = item.number;
-                }
-            }
             accountItem accountItem = new accountItem(categoryNum, date, amount, isPocketMoney, inOrOut, description);
             allItems.Add(accountItem);
             dbManager.InsertIntoDatabase(accountItem);
         }
-        public async void AddCategoryItemm(int index, string name, double _share, string color)
-        {
-            categoryItem categoryItem = new categoryItem(index, name, _share, color);
-            AllCatagoryItem.Add(categoryItem);
-        }
-        public async void AddCategoryItemm(categoryItem newCategory)
-        {
-            AllCatagoryItem.Add(newCategory);
-        }
+
         public async void RemoveAccountItem(string id)
         {
 

@@ -1,5 +1,8 @@
-﻿using System;
+using ShowMeMyMoney.Model;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -24,17 +27,30 @@ namespace ShowMeMyMoney
     /// </summary>
     public sealed partial class Account : Page
     {
-        private ViewModel.ViewModel ViewModel;
+        private ViewModel.ViewModel AccountViewModel;
+        private ViewModel.categoryViewModel CategoryViewModel;
         public Account()
         {
+
             this.InitializeComponent();
         }
         //  待考虑，是否可以修改
-       protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel = ((ViewModel.ViewModel)e.Parameter);
+            var list = e.Parameter as ArrayList;
+            foreach (var item in list)
+            {
+                if (item.GetType() == typeof(ViewModel.categoryViewModel))
+                {
+                    CategoryViewModel = (ViewModel.categoryViewModel)item;
+                }
+                else
+                {
+                    AccountViewModel = (ViewModel.ViewModel)item;
+                }
+            }
         }
-            private bool checkInput()
+        private bool checkInput()
         {
             string warning = "";
             if (Category.SelectedIndex == -1)
@@ -45,8 +61,8 @@ namespace ShowMeMyMoney
             {
                 warning += "金额输入有误\n";
             }
-          //  bool isPocketMoney = (category == "私房钱") ? true : false;
-         //   bool inOrOut = (bool)income.IsChecked;
+            //  bool isPocketMoney = (category == "私房钱") ? true : false;
+            //   bool inOrOut = (bool)income.IsChecked;
             if (Description.Text == "")
             {
                 warning += "请输入描述\n";
@@ -66,14 +82,15 @@ namespace ShowMeMyMoney
         {
             if (!checkInput()) return;
             string category = Category.SelectedItem.ToString();
+            int categoryNum = CategoryViewModel.getCategoryNum(category);
             DateTimeOffset date = Date.Date;
-           
+
             double amount = Convert.ToDouble(Amount.Text);
-            bool isPocketMoney = (category == "私房钱") ? true:false;
+            bool isPocketMoney = (category == "私房钱") ? true : false;
             bool inOrOut = (bool)income.IsChecked;
             string description = Description.Text;
-            ViewModel.AddAccountItem(category, date, amount, isPocketMoney, inOrOut, description);
-            Frame.Navigate(typeof(MainPage), ViewModel);
+            AccountViewModel.AddAccountItem(categoryNum, date, amount, isPocketMoney, inOrOut, description);
+            Frame.Navigate(typeof(MainPage));
         }
 
         private void canclButton_Click(object sender, RoutedEventArgs e)
