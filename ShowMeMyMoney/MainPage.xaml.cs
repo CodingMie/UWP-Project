@@ -96,6 +96,7 @@ namespace ShowMeMyMoney
                     if (text == "" || text == "[]") return;
                     /* 将json文件中的东西反序列化，加入到metadata   */
                     Dictionary<string, double> p = JsonConvert.DeserializeObject<Dictionary<string, double>>(text);
+                    metadata = p;
                 } 
                
             }
