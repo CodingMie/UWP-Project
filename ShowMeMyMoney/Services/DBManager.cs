@@ -37,9 +37,10 @@ namespace ShowMeMyMoney.Services
             }
         }
 
-        public void InsertIntoDatabase(Model.accountItem item) { 
+        public void InsertIntoDatabase(Model.accountItem item)
+        {
             var db = App.conn;
-            string SQLstmt = @"INSERT INTO accounts (Id, amount, createDate, " 
+            string SQLstmt = @"INSERT INTO accounts (Id, amount, createDate, "
                 + "category, isPocketMoney,inOrOut,"
                 + "description) VALUES (?, ?, ?, ?, ?, ?, ?)";
             try
@@ -53,7 +54,7 @@ namespace ShowMeMyMoney.Services
                     todostmt.Bind(5, item.isPocketMoney);
                     todostmt.Bind(6, item.inOrOut);
                     todostmt.Bind(7, item.description);
-                    var a = todostmt.Step(); 
+                    var a = todostmt.Step();
                 }
             }
             catch (Exception ex)
@@ -85,7 +86,7 @@ namespace ShowMeMyMoney.Services
 
 
                     int k = 0;
-                    i.id = (string)statement[k++];
+                    // i.id = (string)statement[k++];
                     i.amount = (double)statement[k++];
                     i.createDate = DateTimeOffset.Parse((string)statement[k++]);
                     i.category = (int)statement[k++];

@@ -9,23 +9,31 @@ namespace ShowMeMyMoney.Model
 {
      public class categoryItem
     {
-        public string name;
-        public int number;
+        public string name { get; set; }
+        public int number { get; }
         public string color;
         public double share;/* 分类当前所占百分比 */
+        public double amount; /* 分类当前总额 */ 
+        public bool inOrOut;
+        /* 0 表示支出，1表示收入*/
+
+
         [JsonConstructor]
-        public categoryItem(int i, string s,  double _share, string c)
+        public categoryItem(int i, string s,  double _share, string c, bool ioo)
         {
             name = s;
-            number = i;
+            number = Guid.NewGuid().GetHashCode()*(i+1);
             color = c;
             share = _share;
+            amount = 0;
+            inOrOut = ioo;
         }
         public categoryItem(string s, int i, string c)
         {
             name = s;
-            number = i;
-            color = c; 
+            number = Guid.NewGuid().GetHashCode();
+            color = c;
+            amount = 0;
         }
     }
 }
