@@ -19,6 +19,11 @@ namespace ShowMeMyMoney.ViewModel
 
         public ObservableCollection<categoryItem> AllCatagoryItem = new ObservableCollection<categoryItem>();
         public ObservableCollection<string> allCategoryName = new ObservableCollection<string>();
+
+        private categoryItem selectedCategory = default(categoryItem);
+        public categoryItem SelectedCategory { get { return selectedCategory; } set { this.selectedCategory = value; } }
+
+
         public DBManager dbManager;
         public ViewModel()
         {
@@ -56,6 +61,20 @@ namespace ShowMeMyMoney.ViewModel
 
             /*删除item并同步数据库*/
 
+        }
+
+        public ObservableCollection<categoryItem> getItemsByCategory(categoryItem c)
+        {
+
+            /* 获得某分类的全部item */
+            return null;
+
+        }
+
+        public categoryItem getCategoryByNumber(int num)
+        {
+            /* 由编号获得category */
+            return null;
         }
     }
 }
