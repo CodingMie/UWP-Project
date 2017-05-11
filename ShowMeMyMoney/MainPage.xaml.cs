@@ -31,15 +31,115 @@ namespace ShowMeMyMoney
     {
         public MainPage()
         {
+            monthlyBudget = 1500;
             this.InitializeComponent();
             this.accountViewModel = new ViewModel.ViewModel();
             this.categoryViewModel = new ViewModel.categoryViewModel();
             remainedProportion = 100;
             makeColorPicker();
             initializeShareSlider();
+            initializeShareBar();
+
+        }
+        /*------ metadata -----*/
+        private double totalExpense, totalIncome, totalPocketMoney, monthlyBudget;
+
+        private Dictionary<string, double> metadata  = new Dictionary<string, double>();
+        private void maintainMetadata()
+        {
+            /* 维护元数据：包括本月预算，总收入，总开支，私房钱
+               */
+            foreach (var item in categoryViewModel.allExpenseCatagoryItems)
+            {
+                remainedProportion -= item.share;
+                totalExpense += item.amount;
+               
+            }
+            foreach (var item in categoryViewModel.allIncomeCatagoryItems)
+            { 
+                totalIncome += item.amount;
+            }
+            TotalExpenseAmount.Text = totalExpense.ToString();
+            TotalIncomeAmount.Text = totalIncome.ToString();
+            PocketMoneyAmount.Text = categoryViewModel.pocketMoneyAmount.ToString();
+            TotalBudgetProportion.Text = "已使用" + remainedProportion + "%";
+            
+        }
+        private async void readMetadataFromFile()
+        { 
+            try
+            {
+                /*  读取json文件  */
+                var Folder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                var item = await Folder.TryGetItemAsync("metadata.json");
+                if (item == null)
+                {
+
+                    metadata.Add("totalExpense", totalExpense);
+                    metadata.Add("totalIncome", totalIncome);
+                    metadata.Add("totalPocketMoney", totalPocketMoney);
+                    metadata.Add("monthlyBudget", monthlyBudget);
+
+                    /* 第一次打开应用, 则无需进行后续操作 */
+                    return;
+                }
+                var file = await Folder.GetFileAsync("metadata.json");
+
+                var data = await file.OpenReadAsync();
+
+                using (StreamReader r = new StreamReader(data.AsStream()))
+                {
+                    string text = r.ReadToEnd();
+
+                    /* 如果json是空的，也不能进行后续操作*/
+                    if (text == "" || text == "[]") return;
+                    /* 将json文件中的东西反序列化，加入到metadata   */
+                    Dictionary<string, double> p = JsonConvert.DeserializeObject<Dictionary<string, double>>(text);
+                    metadata = p;
+                } 
+               
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
-        private void addShareBar(categoryItem c)
+        private async void writeMetadataToFile()
+        {
+              try
+            {
+                var Folder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                var file = await Folder.CreateFileAsync("metadata.json", Windows.Storage.CreationCollisionOption.ReplaceExisting);
+                var data = await file.OpenStreamForWriteAsync();
+
+                metadata["totalExpense"] = totalExpense;
+                metadata["totalIncome"] = totalIncome;
+                metadata["totalPocketMoney"] = totalPocketMoney;
+                metadata["monthlyBudget"] = monthlyBudget;
+
+                using (StreamWriter r = new StreamWriter(data))
+                {
+
+                    var serelizedfile = JsonConvert.SerializeObject(metadata);
+                    r.Write(serelizedfile);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        private void initializeShareBar()
+        {
+            foreach(var item in categoryViewModel.allExpenseCatagoryItems)
+            { 
+                addShareBar(item);
+            }
+        }
+
+        public void addShareBar(categoryItem c)
         {
             /* 从categoryItem里读取分类的比例和颜色，并设置到 “ShareBar”的各个长方形中  */
 
@@ -55,9 +155,14 @@ namespace ShowMeMyMoney
         private double remainedProportion;
         ViewModel.ViewModel accountViewModel { get; set; }
         ViewModel.categoryViewModel categoryViewModel { get; set; }
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (e.Parameter == null)
+            {
+                /* 希望只读一次 */
+                readMetadataFromFile();
+                maintainMetadata();
+            }
             if (e.Parameter != null)
             {
 
@@ -68,6 +173,9 @@ namespace ShowMeMyMoney
                 else if (e.Parameter.GetType() == typeof(ViewModel.categoryViewModel))
                 {
                     this.categoryViewModel = ((ViewModel.categoryViewModel)e.Parameter);
+                    /* 更新总收入/总支出 */
+                    maintainMetadata();
+                    writeMetadataToFile();
                 }
                 accountViewModel.SelectedItem = null;
             }
@@ -108,14 +216,21 @@ namespace ShowMeMyMoney
                 return;
             } 
         */
+            /* 确定收入还是支出 */
 
-
-            categoryItem newCategory = new categoryItem(categoryCount, categoryName.Text, shareSlider.Value, categoryColor.Text);
-
-             /* 分类名称重复约束 */
+            bool incomeOrExpense = incomeButton.IsChecked==true?true:false;
+            double shareValue = shareSlider.Value;
+            if (incomeOrExpense)
+            {
+                // 如果是收入，不设置比例
+                shareValue = 0;
+            }
+            categoryItem newCategory = new categoryItem(categoryCount, categoryName.Text, shareValue, categoryColor.Text, incomeOrExpense);
+            /* 分类名称重复约束 */
             foreach (var item in categoryViewModel.AllCatagoryItems)
             {
-                if (item.name == newCategory.name) {
+                if (item.name == newCategory.name)
+                {
                     AddNewCategoryDialog.Hide();
                     ContentDialog alert = new ContentDialog()
                     {
@@ -128,19 +243,23 @@ namespace ShowMeMyMoney
                     await alert.ShowAsync();
                     return;
                 }
-                    
+
             }
 
+            if (incomeOrExpense == false)
+            {
+
+                remainedProportion -= newCategory.share;
+                /* 如果添加了支出，修改滑块的上限 */
+                shareSlider.Maximum = remainedProportion;
+                /* 添加shareBar的条条 */
+                addShareBar(newCategory);
+            }
             /* 添加新分类 */
             categoryViewModel.AddCategoryItem(newCategory);
             categoryCount++;
-            remainedProportion -= newCategory.share;
-            categoryViewModel.saveCategoryTable();
+            categoryViewModel.saveCategoryTable(incomeOrExpense);
             AddNewCategoryDialog.Hide();
-            /* 添加shareBar的条条 */
-            addShareBar(newCategory);
-            /* 修改滑块的上限 */
-            shareSlider.Maximum = remainedProportion;
         }
 
         private void AddNewCategoryDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -159,7 +278,7 @@ namespace ShowMeMyMoney
         {
             var colors = typeof(Colors).GetTypeInfo().DeclaredProperties;
 
-           
+
 
             foreach (var item in colors)
             {
@@ -167,7 +286,7 @@ namespace ShowMeMyMoney
                 ColorPallete_Combo.Items.Add(item);
             }
 
-            
+
         }
         private void ColorPalleteCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -182,12 +301,22 @@ namespace ShowMeMyMoney
 
         private void shareSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-           /* 好像不需要干嘛 */
+            /* 好像不需要干嘛 */
         }
 
         private void initializeShareSlider()
         {
             shareSlider.Maximum = remainedProportion;
+        }
+
+        private void out_Checked(object sender, RoutedEventArgs e)
+        {
+            shareSlider.Visibility = Visibility.Visible;
+        }
+
+        private void in_Checked(object sender, RoutedEventArgs e)
+        {
+            shareSlider.Visibility = Visibility.Collapsed;
         }
     }
 

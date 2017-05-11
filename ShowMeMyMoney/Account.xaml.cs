@@ -29,6 +29,8 @@ namespace ShowMeMyMoney
     {
         private ViewModel.ViewModel AccountViewModel;
         private ViewModel.categoryViewModel CategoryViewModel;
+        
+
         public Account()
         {
 
@@ -49,14 +51,18 @@ namespace ShowMeMyMoney
                     AccountViewModel = (ViewModel.ViewModel)item;
                 }
             }
+            /* 默认分类为支出 */
+            expense.IsChecked = true;
+
         }
         private bool checkInput()
         {
             string warning = "";
-            if (Category.SelectedIndex == -1)
+            /*
+            if (ExpenseCategory.SelectedIndex == -1 || IncomeCategory.SelectedIndex == -1)
             {
                 warning += "请选择类别\n";
-            }
+            }*/
             if (!Regex.IsMatch(Amount.Text, @"^(-?\d+)(\.\d+)?$"))
             {
                 warning += "金额输入有误\n";
@@ -81,16 +87,34 @@ namespace ShowMeMyMoney
         private void createButton_Click(object sender, RoutedEventArgs e)
         {
             if (!checkInput()) return;
-            string category = Category.SelectedItem.ToString();
-            int categoryNum = CategoryViewModel.getCategoryNum(category);
-            DateTimeOffset date = Date.Date;
 
+            bool expenseOrIncome = expense.IsChecked == true ? false : true;
+
+            string category = expenseOrIncome ? ((categoryItem)IncomeCategory.SelectedItem).name : ((categoryItem)ExpenseCategory.SelectedItem).name;
+
+            int categoryNum = CategoryViewModel.getCategoryNum(category, expenseOrIncome);
+            DateTimeOffset date = Date.Date; 
             double amount = Convert.ToDouble(Amount.Text);
-            bool isPocketMoney = (category == "私房钱") ? true : false;
-            bool inOrOut = (bool)income.IsChecked;
+            
+            bool isPocketMoney = PocketMoney.IsChecked == true ? true : false;   
+            if (isPocketMoney)
+            {
+                amount = expenseOrIncome ? amount : amount * (-1);
+                /* 用了私房钱就要修改VM */
+                CategoryViewModel.pocketMoneyAmount += amount;
+
+                
+            }
             string description = Description.Text;
-            AccountViewModel.AddAccountItem(categoryNum, date, amount, isPocketMoney, inOrOut, description);
-            Frame.Navigate(typeof(MainPage));
+
+            var newAccount = new accountItem(categoryNum, date, amount, isPocketMoney, expenseOrIncome, description);
+            AccountViewModel.AddAccountItem(categoryNum, date, amount, isPocketMoney, expenseOrIncome, description);
+
+            /* 修改分类总额 */
+            CategoryViewModel.UpdateCategoryByAccount(newAccount);
+
+            /* 发送修改后的viewmodel到主页*/
+            Frame.Navigate(typeof(MainPage), CategoryViewModel);
         }
 
         private void canclButton_Click(object sender, RoutedEventArgs e)
@@ -101,6 +125,19 @@ namespace ShowMeMyMoney
             income.IsChecked = false;
             Description.Text = "";
             Frame.Navigate(typeof(MainPage));
+        }
+
+        private void out_Checked(object sender, RoutedEventArgs e)
+        {
+            IncomeCategory.Visibility = Visibility.Collapsed;
+            ExpenseCategory.Visibility = Visibility.Visible;
+        }
+
+        private void income_Checked(object sender, RoutedEventArgs e)
+        {
+            IncomeCategory.Visibility = Visibility.Visible;
+            ExpenseCategory.Visibility = Visibility.Collapsed;
+
         }
     }
 }
