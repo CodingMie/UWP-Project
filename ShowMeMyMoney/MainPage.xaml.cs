@@ -83,7 +83,6 @@ namespace ShowMeMyMoney
             writeMetadataToFile();
             updateMetadataViews();
         }
-
         private async void readMetadataFromFile()
         {
             try
@@ -267,7 +266,6 @@ namespace ShowMeMyMoney
                 shareValue = 0;
             }
             categoryItem newCategory = new categoryItem(categoryCount, categoryName.Text, shareValue, categoryColor.Text, incomeOrExpense);
-
             /* 分类名称重复约束 */
             foreach (var item in categoryViewModel.AllCatagoryItems)
             {

@@ -34,7 +34,9 @@ namespace ShowMeMyMoney.Model
             _isPocketMoney = isPocketMoney;
             _inOrOut = inOrOut;
             _description = description;
+
             id =  Guid.NewGuid().ToString();
+
         }
 
         public accountItem()

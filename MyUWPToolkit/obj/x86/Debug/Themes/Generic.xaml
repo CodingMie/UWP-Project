@@ -1,0 +1,21 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyUWPToolkit">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ms-appx:///MyUWPToolkit/themes/PullToRefreshControl.Xaml"/>
+        <ResourceDictionary Source="ms-appx:///MyUWPToolkit/themes/ColumnChart.Xaml"/>
+        <ResourceDictionary Source="ms-appx:///MyUWPToolkit/themes/CropImageControl.Xaml"/>
+        <ResourceDictionary Source="ms-appx:///MyUWPToolkit/themes/PullToRefreshPanel.Xaml"/>
+        <ResourceDictionary Source="ms-appx:///MyUWPToolkit/themes/ImageTool.Xaml"/>
+        <ResourceDictionary Source="ms-appx:///MyUWPToolkit/themes/VirtualizedVariableSizedGridView.Xaml"/>
+        <ResourceDictionary Source="ms-appx:///MyUWPToolkit/themes/Win2DImageTool.Xaml"/>
+        <ResourceDictionary Source="ms-appx:///MyUWPToolkit/themes/FlexGrid.Xaml"/>
+        <ResourceDictionary Source="ms-appx:///MyUWPToolkit/themes/GroupListView.Xaml"/>
+        <ResourceDictionary Source="ms-appx:///MyUWPToolkit/themes/PullToRefreshGrid.Xaml"/>
+        <ResourceDictionary Source="ms-appx:///MyUWPToolkit/themes/ColorPicker.Xaml"/>
+        <ResourceDictionary Source="ms-appx:///MyUWPToolkit/themes/NumericUpDown.Xaml"/>
+        <ResourceDictionary Source="ms-appx:///MyUWPToolkit/themes/HightLightedRadioButton.Xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>
+

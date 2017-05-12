@@ -82,10 +82,9 @@
 
 
             <!-- 比例颜色条 -->
-                <StackPanel x:Name="shareBar" Orientation="Horizontal" Margin="10" Height="32" >
+            <StackPanel x:Name="shareBar" Orientation="Horizontal" Margin="10" Height="32" >
                 <TextBlock/>
             </StackPanel>
-
             <Border x:Name="表头" BorderBrush="Black" BorderThickness="1" 
                                     HorizontalAlignment="Center"
                                   VerticalAlignment="Center"     Width="Auto" >
