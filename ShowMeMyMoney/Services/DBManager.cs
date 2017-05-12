@@ -51,10 +51,11 @@ namespace ShowMeMyMoney.Services
                     todostmt.Bind(2, item.amount);
                     todostmt.Bind(3, item.createDate.ToString());
                     todostmt.Bind(4, item.category);
-                    todostmt.Bind(5, item.isPocketMoney);
-                    todostmt.Bind(6, item.inOrOut);
+                    todostmt.Bind(5, Convert.ToInt16(item.isPocketMoney) );
+                    todostmt.Bind(6, Convert.ToInt16(item.inOrOut));
                     todostmt.Bind(7, item.description);
                     var a = todostmt.Step();
+                    var b = 1;
                 }
             }
             catch (Exception ex)
