@@ -20,6 +20,11 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 
+using Windows.UI.Notifications;
+using NotificationsExtensions.Tiles;
+using NotificationsExtensions;
+using Windows.UI.Xaml.Media.Imaging;
+
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
 namespace ShowMeMyMoney
@@ -34,27 +39,35 @@ namespace ShowMeMyMoney
             monthlyBudget = 1500;
             this.InitializeComponent();
 
-
-
             this.accountViewModel = new ViewModel.ViewModel();
             this.categoryViewModel = new ViewModel.categoryViewModel();
             remainedProportion = 100;
             makeColorPicker();
             initializeShareSlider();
-            initializeShareBar(); 
-            
+            initializeShareBar();
+            createTile();
+
             
 
 
         }
-
         private void updateMetadataViews()
         {
             TotalExpenseAmount.Text = totalExpense.ToString();
             TotalIncomeAmount.Text = totalIncome.ToString();
             PocketMoneyAmount.Text = totalPocketMoney.ToString();
             TotalBudgetProportion.Text = "已使用" + totalExpense/monthlyBudget + "%";
-
+            if (totalExpense/monthlyBudget < 20)
+            {
+                pic.Source = new BitmapImage(new Uri("ms-appx:///Assets/pic3.jpg", UriKind.RelativeOrAbsolute));
+            } else if (totalExpense / monthlyBudget < 50)
+            {
+                pic.Source = new BitmapImage(new Uri("ms-appx:///Assets/pic2.jpg", UriKind.RelativeOrAbsolute));
+            } else
+            {
+                pic.Source = new BitmapImage(new Uri("ms-appx:///Assets/pic1.jpg", UriKind.RelativeOrAbsolute));
+            }
+            createTile();
         }
 
         /*------ metadata -----*/
@@ -358,6 +371,138 @@ namespace ShowMeMyMoney
         {
             shareSlider.Visibility = Visibility.Collapsed;
         }
-    }
 
+        public void createTile()
+        {
+            string from = (monthlyBudget+totalIncome-totalExpense).ToString();
+            string subject = "本月余额";
+            string body = "点此来记账";
+            string picSource = ((BitmapImage)pic.Source).UriSource.LocalPath;
+            picSource = picSource.Substring(1);
+
+
+            // Construct the tile content
+            TileContent content = new TileContent()
+            {
+                Visual = new TileVisual()
+                {
+                    TileMedium = new TileBinding()
+                    {
+                        Content = new TileBindingContentAdaptive()
+                        {
+                            PeekImage = new TilePeekImage()
+                            {
+                                Source = picSource
+                            },
+                            Children =
+                            {
+                                new AdaptiveText()
+                                {
+                                    Text = subject,
+                                               HintStyle = AdaptiveTextStyle.SubtitleSubtle,
+                HintAlign = AdaptiveTextAlign.Center
+                                },
+                                new AdaptiveText()
+                                {
+                                    Text = from,
+                                                    HintStyle = AdaptiveTextStyle.Title,
+                HintAlign = AdaptiveTextAlign.Center
+                                },
+
+
+                                new AdaptiveText()
+                                {
+                                    Text = body,
+                                    HintStyle = AdaptiveTextStyle.CaptionSubtle,
+                HintAlign = AdaptiveTextAlign.Center
+                                }
+                            }
+                        }
+                    },
+
+                    TileWide = new TileBinding()
+                    {
+                        Content = new TileBindingContentAdaptive()
+                        {
+                            Children =
+                            {
+                                new AdaptiveText()
+                                {
+                                    Text = subject,
+                                               HintStyle = AdaptiveTextStyle.SubtitleSubtle,
+                HintAlign = AdaptiveTextAlign.Center
+                                },
+                                new AdaptiveText()
+                                {
+                                    Text = from,
+                                                    HintStyle = AdaptiveTextStyle.Title,
+                HintAlign = AdaptiveTextAlign.Center
+                                },
+
+                                new AdaptiveText()
+                                {
+                                    Text = body,
+                                    HintStyle = AdaptiveTextStyle.CaptionSubtle,
+                HintAlign = AdaptiveTextAlign.Center
+                                }
+                            }
+                        }
+                    },
+                    TileLarge = new TileBinding()
+                    {
+                        Content = new TileBindingContentAdaptive()
+                        {
+                            TextStacking = TileTextStacking.Center,
+                            Children =
+        {
+            new AdaptiveGroup()
+            {
+                Children =
+                {
+                    new AdaptiveSubgroup() { HintWeight = 1 },
+                    new AdaptiveSubgroup()
+                    {
+                        HintWeight = 2,
+                        Children =
+                        {
+                            new AdaptiveImage()
+                            {
+                                Source = picSource,
+                                HintCrop = AdaptiveImageCrop.Circle
+                            }
+                        }
+                    },
+                    new AdaptiveSubgroup() { HintWeight = 1 }
+                }
+            },
+            new AdaptiveText()
+            {
+                Text = from,
+                HintStyle = AdaptiveTextStyle.Title,
+                HintAlign = AdaptiveTextAlign.Center
+            },
+            new AdaptiveText()
+            {
+                Text = body,
+                HintStyle = AdaptiveTextStyle.SubtitleSubtle,
+                HintAlign = AdaptiveTextAlign.Center
+            }
+        }
+                        }
+                    }
+                }
+                };
+
+            //TileUpdateManager.CreateTileUpdaterForApplication().Clear();
+            var notification = new TileNotification(content.GetXml());
+            // And send the notification
+            TileUpdateManager.CreateTileUpdaterForApplication().Update(notification);
+
+        }
+
+    }
 }
+
+
+/*                    
+*/

@@ -37,12 +37,12 @@
                     </ComboBox>
                     <ComboBox Width="300" ItemsSource="{Binding Source={StaticResource IncomeCGList}, Mode=OneWay}" DisplayMemberPath="name" Header="收入分类"  HorizontalAlignment="Center" x:Name="IncomeCategory" Margin="0, 20, 0, 0">
                     </ComboBox>
-                    <Grid Margin="0,5,0,0">
+                    <Grid Width="300"  Margin="0,5,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"  x:Name="Amount" Header="金额" Width="150" HorizontalAlignment="Center" Margin="20,0,0,0" />
+                        <TextBox Grid.Column="0"  x:Name="Amount" Header="金额" Width="150" HorizontalAlignment="Center" Margin="0,0,0,0" />
                         <CheckBox x:Name="PocketMoney" Margin="15, 0, 0, 0" VerticalAlignment="Bottom" Content="私房钱" Grid.Column="1" HorizontalAlignment="Center"/>
                     </Grid>
                     <TextBox  x:Name="Description" Width="300" Height="96" Margin="0,20,0,0" Header="详情" />
