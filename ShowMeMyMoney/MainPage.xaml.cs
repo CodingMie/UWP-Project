@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using ShowMeMyMoney.Model;
 using System;
 using System.Collections;
@@ -33,45 +33,64 @@ namespace ShowMeMyMoney
         {
             monthlyBudget = 1500;
             this.InitializeComponent();
+
+
+
             this.accountViewModel = new ViewModel.ViewModel();
             this.categoryViewModel = new ViewModel.categoryViewModel();
             remainedProportion = 100;
             makeColorPicker();
             initializeShareSlider();
-            initializeShareBar();
+            initializeShareBar(); 
+            
+            
+
 
         }
+
+        private void updateMetadataViews()
+        {
+            TotalExpenseAmount.Text = totalExpense.ToString();
+            TotalIncomeAmount.Text = totalIncome.ToString();
+            PocketMoneyAmount.Text = totalPocketMoney.ToString();
+            TotalBudgetProportion.Text = "已使用" + totalExpense/monthlyBudget + "%";
+
+        }
+
         /*------ metadata -----*/
         private double totalExpense, totalIncome, totalPocketMoney, monthlyBudget;
-
-        private Dictionary<string, double> metadata  = new Dictionary<string, double>();
+        private bool locked = false;
+        private Dictionary<string, double> metadata = new Dictionary<string, double>();
         private void maintainMetadata()
         {
-            /* 维护元数据：包括本月预算，总收入，总开支，私房钱
+            /* 根据ViewModel更新元数据：包括本月预算，总收入，总开支，私房钱
                */
+            totalExpense = totalIncome = 0;
             foreach (var item in categoryViewModel.allExpenseCatagoryItems)
             {
                 remainedProportion -= item.share;
                 totalExpense += item.amount;
-               
+
             }
             foreach (var item in categoryViewModel.allIncomeCatagoryItems)
-            { 
+            {
                 totalIncome += item.amount;
             }
-            TotalExpenseAmount.Text = totalExpense.ToString();
-            TotalIncomeAmount.Text = totalIncome.ToString();
-            PocketMoneyAmount.Text = categoryViewModel.pocketMoneyAmount.ToString();
-            TotalBudgetProportion.Text = "已使用" + remainedProportion + "%";
-            
+
+            totalPocketMoney = categoryViewModel.pocketMoneyAmount;
+            locked = true;
+            /* 将更新后的metadata写入文件保存 */
+            writeMetadataToFile();
+            updateMetadataViews();
         }
         private async void readMetadataFromFile()
-        { 
+        {
             try
             {
                 /*  读取json文件  */
                 var Folder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 var item = await Folder.TryGetItemAsync("metadata.json");
+                var a = 1;
                 if (item == null)
                 {
 
@@ -96,8 +115,18 @@ namespace ShowMeMyMoney
                     /* 将json文件中的东西反序列化，加入到metadata   */
                     Dictionary<string, double> p = JsonConvert.DeserializeObject<Dictionary<string, double>>(text);
                     metadata = p;
-                } 
-               
+
+                   totalExpense = metadata["totalExpense"];
+                    totalIncome =  metadata["totalIncome"]  ;
+                    totalPocketMoney =  metadata["totalPocketMoney"]  ;
+                    monthlyBudget = metadata["monthlyBudget"];
+
+
+
+                    updateMetadataViews();
+                    locked = false;
+                }
+
             }
             catch (Exception e)
             {
@@ -107,7 +136,7 @@ namespace ShowMeMyMoney
 
         private async void writeMetadataToFile()
         {
-              try
+            try
             {
                 var Folder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 var file = await Folder.CreateFileAsync("metadata.json", Windows.Storage.CreationCollisionOption.ReplaceExisting);
@@ -133,8 +162,8 @@ namespace ShowMeMyMoney
 
         private void initializeShareBar()
         {
-            foreach(var item in categoryViewModel.allExpenseCatagoryItems)
-            { 
+            foreach (var item in categoryViewModel.allExpenseCatagoryItems)
+            {
                 addShareBar(item);
             }
         }
@@ -157,11 +186,10 @@ namespace ShowMeMyMoney
         ViewModel.categoryViewModel categoryViewModel { get; set; }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+
             if (e.Parameter == null)
             {
-                /* 希望只读一次 */
-                readMetadataFromFile();
-                maintainMetadata();
+               
             }
             if (e.Parameter != null)
             {
@@ -174,12 +202,24 @@ namespace ShowMeMyMoney
                 {
                     this.categoryViewModel = ((ViewModel.categoryViewModel)e.Parameter);
                     /* 更新总收入/总支出 */
+                    locked = true;
                     maintainMetadata();
-                    writeMetadataToFile();
                 }
                 accountViewModel.SelectedItem = null;
+
+
+                
+            }
+
+            /* 希望只读一次 */
+            if (!locked)
+            {
+                readMetadataFromFile();
             }
         }
+
+
+
         private void ShowCategory_Click(object sender, ItemClickEventArgs e)
         {
             /* 将分类item发送到accountsListViewPage */
@@ -218,7 +258,7 @@ namespace ShowMeMyMoney
         */
             /* 确定收入还是支出 */
 
-            bool incomeOrExpense = incomeButton.IsChecked==true?true:false;
+            bool incomeOrExpense = incomeButton.IsChecked == true ? true : false;
             double shareValue = shareSlider.Value;
             if (incomeOrExpense)
             {
