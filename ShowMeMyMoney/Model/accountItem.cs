@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -21,8 +21,8 @@ namespace ShowMeMyMoney.Model
         /* 0 表示支出，1表示收入*/
         private string _description;
         /* 对该项记录的详细描述 */
-        private string _id;
-        
+        public string id { get; }
+
 
         /* 主码 */
         public accountItem(int category, DateTimeOffset date, double amount,
@@ -34,12 +34,13 @@ namespace ShowMeMyMoney.Model
             _isPocketMoney = isPocketMoney;
             _inOrOut = inOrOut;
             _description = description;
-            _id =  Guid.NewGuid().ToString();
+            id =  Guid.NewGuid().ToString();
         }
 
         public accountItem()
         {
 
+            id = Guid.NewGuid().ToString();
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -48,7 +49,6 @@ namespace ShowMeMyMoney.Model
             PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        public string id { get; }
 
         public int category  {
             get { return _category ; }
