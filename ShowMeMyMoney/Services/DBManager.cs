@@ -84,7 +84,7 @@ namespace ShowMeMyMoney.Services
 
                 while (statement.Step() == SQLiteResult.ROW)
                 {
-                    accountItem i = new accountItem();
+                    accountItem i = new accountItem((string)statement[0]);
 
 
 /*<<<<<<< HEAD

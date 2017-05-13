@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -38,10 +38,10 @@ namespace ShowMeMyMoney.Model
 
         }
 
-        public accountItem()
+        public accountItem(string id)
         {
 
-            id = Guid.NewGuid().ToString();
+            this.id = id;
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

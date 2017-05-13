@@ -122,10 +122,13 @@ namespace ShowMeMyMoney
                     /* 将json文件中的东西反序列化，加入到metadata   */
                     Dictionary<string, double> p = JsonConvert.DeserializeObject<Dictionary<string, double>>(text);
                     metadata = p;
-                    totalExpense = metadata["totalExpense"];
-                    totalIncome = metadata["totalIncome"];
-                    totalPocketMoney = metadata["totalPocketMoney"];
-                    monthlyBudget = metadata["monthlyBudget"];
+                    if (metadata != null)
+                    {
+                        totalExpense = metadata["totalExpense"];
+                        totalIncome = metadata["totalIncome"];
+                        totalPocketMoney = metadata["totalPocketMoney"];
+                        monthlyBudget = metadata["monthlyBudget"];
+                    }
 
 
 
@@ -152,7 +155,6 @@ namespace ShowMeMyMoney
                 metadata["totalIncome"] = totalIncome;
                 metadata["totalPocketMoney"] = totalPocketMoney;
                 metadata["monthlyBudget"] = monthlyBudget;
-
                 using (StreamWriter r = new StreamWriter(data))
                 {
 

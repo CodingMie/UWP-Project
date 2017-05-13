@@ -10,7 +10,7 @@ namespace ShowMeMyMoney.Model
     public class categoryItem
     {
         public string name { get; set; }
-        public long number { get; }
+        public long number { get; set; }
         public string color;
         public double share;/* 分类当前所占百分比 */
         public double amount; /* 分类当前总额 */

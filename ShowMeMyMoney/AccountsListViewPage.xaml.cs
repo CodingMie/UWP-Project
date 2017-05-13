@@ -104,6 +104,12 @@ namespace ShowMeMyMoney
         private void delete_click(object sender, RoutedEventArgs e)
         {
             ViewModel.RemoveAccountItem(ViewModel.SelectedItem.id);
+            ViewModel.SelectedItem = null;
+            category.Text = "";
+            amount.Text = "";
+            inOrOut.Text = "";
+            description.Text = "";
+            date.Text = "";
         }
         
     }

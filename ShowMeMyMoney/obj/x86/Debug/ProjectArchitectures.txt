@@ -1,1 +1,1 @@
-D:\大二下\现操\期中\homework\ShowMeMyMoney\ShowMeMyMoney.csproj;x86
+G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\ShowMeMyMoney.csproj;x86
