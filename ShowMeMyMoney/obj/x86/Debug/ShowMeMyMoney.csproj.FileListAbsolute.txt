@@ -212,17 +212,13 @@ D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\AccountsListView
 D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\AccountsListViewPage.g.cs
 D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\MainPage.g.i.cs
 D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\MainPage.g.cs
-D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\NewPage.g.i.cs
-D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\NewPage.g.cs
 D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\XamlTypeInfo.g.cs
 D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\App.xaml
 D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\AccountsListViewPage.xaml
 D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\MainPage.xaml
-D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\NewPage.xaml
 D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\App.xbf
 D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\AccountsListViewPage.xbf
 D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\MainPage.xbf
-D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\NewPage.xbf
 D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\XamlSaveStateFile.xml
 D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\ShowMeMyMoney.exe
 D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\ShowMeMyMoney.pdb
@@ -231,7 +227,6 @@ D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\SQLitePCL.Ext.pr
 D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\App.xbf
 D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\AccountsListViewPage.xbf
 D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\MainPage.xbf
-D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\NewPage.xbf
 D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\ShowMeMyMoney.xr.xml
 D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\ShowMeMyMoney.exe
 D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\ShowMeMyMoney.pdb
@@ -637,3 +632,5 @@ G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\obj\x86\Debug\resource
 G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\obj\x86\Debug\SQLitePCL.Ext.pri.xml
 G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\obj\x86\Debug\ProjectArchitectures.txt
 G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\obj\x86\Debug\ShowMeMyMoney.csprojResolveAssemblyReference.cache
+D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\NotificationsExtensions.Win10.dll
+D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\NotificationsExtensions.Win10.pdb
