@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ShowMeMyMoney.Model
 {
-    public class accountItem: INotifyPropertyChanged
+    public class accountItem : INotifyPropertyChanged
     {
-        private int _category;
+        private long _category;
         /*  用数字表示分类，这样分类可以改变名字； 
         需要另外维护一个分类表*/
         private DateTimeOffset _createDate;
@@ -25,7 +25,7 @@ namespace ShowMeMyMoney.Model
 
 
         /* 主码 */
-        public accountItem(int category, DateTimeOffset date, double amount,
+        public accountItem(long category, DateTimeOffset date, double amount,
                             bool isPocketMoney, bool inOrOut, string description)
         {
             _category = category;
@@ -34,7 +34,6 @@ namespace ShowMeMyMoney.Model
             _isPocketMoney = isPocketMoney;
             _inOrOut = inOrOut;
             _description = description;
-
             id =  Guid.NewGuid().ToString();
 
         }
@@ -48,12 +47,13 @@ namespace ShowMeMyMoney.Model
 
         protected void RaisePropertyChanged(string name)
         {
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
+            //PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
 
-        public int category  {
-            get { return _category ; }
+        public long category
+        {
+            get { return _category; }
             set
             {
                 if (_category != value)
@@ -64,8 +64,9 @@ namespace ShowMeMyMoney.Model
             }
         }
 
-        public string description  {
-            get { return _description ; }
+        public string description
+        {
+            get { return _description; }
             set
             {
                 if (_description != value)
@@ -76,8 +77,9 @@ namespace ShowMeMyMoney.Model
             }
         }
 
-        public  DateTimeOffset createDate  {
-            get { return _createDate ; }
+        public DateTimeOffset createDate
+        {
+            get { return _createDate; }
             set
             {
                 if (_createDate != value)
@@ -88,8 +90,9 @@ namespace ShowMeMyMoney.Model
             }
         }
 
-        public double amount   {
-            get { return _amount ; }
+        public double amount
+        {
+            get { return _amount; }
             set
             {
                 if (_amount != value)
@@ -100,8 +103,9 @@ namespace ShowMeMyMoney.Model
             }
         }
 
-        public bool isPocketMoney   {
-            get { return _isPocketMoney ; }
+        public bool isPocketMoney
+        {
+            get { return _isPocketMoney; }
             set
             {
                 if (_isPocketMoney != value)
@@ -112,8 +116,9 @@ namespace ShowMeMyMoney.Model
             }
         }
 
-        public bool inOrOut   {
-            get { return _inOrOut ; }
+        public bool inOrOut
+        {
+            get { return _inOrOut; }
             set
             {
                 if (_inOrOut != value)

@@ -24,7 +24,6 @@
                     Background="AliceBlue">
                 <TextBlock Text="  Show Me My Money  " 
                        HorizontalAlignment="Center"
-                      
                        Style="{StaticResource myTitle}"
                       ></TextBlock>
                 <!-- 本月总预算 -->

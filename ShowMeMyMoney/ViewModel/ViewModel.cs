@@ -15,25 +15,31 @@ namespace ShowMeMyMoney.ViewModel
         private ObservableCollection<accountItem> allItems = new ObservableCollection<accountItem>();
         public ObservableCollection<accountItem> AllItems { get { return this.allItems; } set { this.allItems = value; } }
 
+        private ObservableCollection<accountItem> displayItems = new ObservableCollection<accountItem>();
+        public ObservableCollection<accountItem> DisplayItems { get { return this.displayItems; } set { this.displayItems = value; } }
+
         private accountItem selectedItem = default(accountItem);
         public accountItem SelectedItem { get { return selectedItem; } set { this.selectedItem = value; } }
         public DBManager dbManager;
         public ViewModel()
         {
             dbManager = new DBManager();
-           // AllCatagoryItem.Add(new categoryItem("play", 1, "red"));
-      //      public categoryItem(int i, string s, double _share, string c)
         }
         public async void getItemsFromDB(categoryItem ci)
         {
-            /*  初始载入时连接到数据库，加载数据 */
+            displayItems.Clear();
+            List<accountItem> items = dbManager.SearchDatabaseById(ci.number);
+            for (int i = 0; i < items.Count; i++)
+            {
+                displayItems.Add(items[i]);
+            }
         }
 
         /* public async void AddAccountItem(accountItem item) {
              /*  添加item并插入到数据库  */
 
         //}
-        public async void AddAccountItem(int categoryNum, DateTimeOffset date, double amount, 
+        public async void AddAccountItem(long categoryNum, DateTimeOffset date, double amount,
                             bool isPocketMoney, bool inOrOut, string description)
         {
             accountItem accountItem = new accountItem(categoryNum, date, amount, isPocketMoney, inOrOut, description);
@@ -43,9 +49,14 @@ namespace ShowMeMyMoney.ViewModel
 
         public async void RemoveAccountItem(string id)
         {
-
-            /*删除item并同步数据库*/
-
+            foreach (var item in allItems)
+            {
+                if (item.id == id)
+                {
+                    allItems.Remove(item);
+                    dbManager.DeleteItemInDatabase(id);
+                }
+            }
         }
     }
 }
