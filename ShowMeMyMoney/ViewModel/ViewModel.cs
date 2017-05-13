@@ -24,14 +24,24 @@ namespace ShowMeMyMoney.ViewModel
         public ViewModel()
         {
             dbManager = new DBManager();
+
+            /* 从数据库读取全部items */
+            if (allItems.Count == 0)
+            {
+                allItems = dbManager.LoadAllItems();
+            }
         }
-        public async void getItemsFromDB(categoryItem ci)
+
+        /* 从allItems中选出特定类别的items */
+        public void queryDisplayItems(categoryItem ci)
         {
             displayItems.Clear();
-            List<accountItem> items = dbManager.SearchDatabaseById(ci.number);
-            for (int i = 0; i < items.Count; i++)
+            for (int i = 0; i < allItems.Count; i++)
             {
-                displayItems.Add(items[i]);
+                if (allItems[i].category == ci.number)
+                {
+                    displayItems.Add(allItems[i]);
+                }
             }
         }
 
@@ -54,6 +64,7 @@ namespace ShowMeMyMoney.ViewModel
                 if (item.id == id)
                 {
                     displayItems.Remove(item);
+                    allItems.Remove(item);
                     dbManager.DeleteItemInDatabase(id);
                     break;
                 }
