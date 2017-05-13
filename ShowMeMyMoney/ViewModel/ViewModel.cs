@@ -49,12 +49,13 @@ namespace ShowMeMyMoney.ViewModel
 
         public async void RemoveAccountItem(string id)
         {
-            foreach (var item in allItems)
+            foreach (var item in displayItems)
             {
                 if (item.id == id)
                 {
-                    allItems.Remove(item);
+                    displayItems.Remove(item);
                     dbManager.DeleteItemInDatabase(id);
+                    break;
                 }
             }
         }
