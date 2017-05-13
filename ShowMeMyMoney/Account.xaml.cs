@@ -29,8 +29,6 @@ namespace ShowMeMyMoney
     {
         private ViewModel.ViewModel AccountViewModel;
         private ViewModel.categoryViewModel CategoryViewModel;
-        
-
         public Account()
         {
 
@@ -53,6 +51,10 @@ namespace ShowMeMyMoney
             }
             /* 默认分类为支出 */
             expense.IsChecked = true;
+            if (AccountViewModel != null && AccountViewModel.SelectedItem != null)
+            {
+            }
+
 
         }
         private bool checkInput()
@@ -92,18 +94,16 @@ namespace ShowMeMyMoney
 
             string category = expenseOrIncome ? ((categoryItem)IncomeCategory.SelectedItem).name : ((categoryItem)ExpenseCategory.SelectedItem).name;
 
-            int categoryNum = CategoryViewModel.getCategoryNum(category, expenseOrIncome);
-            DateTimeOffset date = Date.Date; 
+            long categoryNum = CategoryViewModel.getCategoryNum(category, expenseOrIncome);
+            DateTimeOffset date = Date.Date;
             double amount = Convert.ToDouble(Amount.Text);
-            
-            bool isPocketMoney = PocketMoney.IsChecked == true ? true : false;   
+
+            bool isPocketMoney = PocketMoney.IsChecked == true ? true : false;
             if (isPocketMoney)
             {
                 amount = expenseOrIncome ? amount : amount * (-1);
                 /* 用了私房钱就要修改VM */
                 CategoryViewModel.pocketMoneyAmount += amount;
-
-                
             }
             string description = Description.Text;
 

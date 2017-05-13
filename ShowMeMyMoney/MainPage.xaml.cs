@@ -38,7 +38,6 @@ namespace ShowMeMyMoney
         {
             monthlyBudget = 1500;
             this.InitializeComponent();
-
             this.accountViewModel = new ViewModel.ViewModel();
             this.categoryViewModel = new ViewModel.categoryViewModel();
             remainedProportion = 100;
@@ -46,10 +45,6 @@ namespace ShowMeMyMoney
             initializeShareSlider();
             initializeShareBar();
             createTile();
-
-            
-
-
         }
         private void updateMetadataViews()
         {
@@ -83,7 +78,6 @@ namespace ShowMeMyMoney
             {
                 remainedProportion -= item.share;
                 totalExpense += item.amount;
-
             }
             foreach (var item in categoryViewModel.allIncomeCatagoryItems)
             {
@@ -128,10 +122,9 @@ namespace ShowMeMyMoney
                     /* 将json文件中的东西反序列化，加入到metadata   */
                     Dictionary<string, double> p = JsonConvert.DeserializeObject<Dictionary<string, double>>(text);
                     metadata = p;
-
-                   totalExpense = metadata["totalExpense"];
-                    totalIncome =  metadata["totalIncome"]  ;
-                    totalPocketMoney =  metadata["totalPocketMoney"]  ;
+                    totalExpense = metadata["totalExpense"];
+                    totalIncome = metadata["totalIncome"];
+                    totalPocketMoney = metadata["totalPocketMoney"];
                     monthlyBudget = metadata["monthlyBudget"];
 
 
@@ -202,7 +195,7 @@ namespace ShowMeMyMoney
 
             if (e.Parameter == null)
             {
-               
+
             }
             if (e.Parameter != null)
             {
@@ -219,9 +212,6 @@ namespace ShowMeMyMoney
                     maintainMetadata();
                 }
                 accountViewModel.SelectedItem = null;
-
-
-                
             }
 
             /* 希望只读一次 */
@@ -237,7 +227,8 @@ namespace ShowMeMyMoney
         {
             /* 将分类item发送到accountsListViewPage */
             categoryItem citem = ((categoryItem)(e.ClickedItem));
-            Frame.Navigate(typeof(AccountsListViewPage), citem);
+            categoryViewModel.SelectedCategory = citem;
+            Frame.Navigate(typeof(AccountsListViewPage), categoryViewModel);
         }
 
 
@@ -338,7 +329,6 @@ namespace ShowMeMyMoney
                 /* TODO: 删除已经被选走的颜色 。 要实现该功能，还要在新增分类时维护颜色表。  */
                 ColorPallete_Combo.Items.Add(item);
             }
-
 
         }
         private void ColorPalleteCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)

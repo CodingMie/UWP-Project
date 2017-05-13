@@ -19,7 +19,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>5688CFD94F5FB29D36CB4D2B7943D3375C569C80FF30E39C902A199CE7E29EDE</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>EB049A5682F89CA4113893BF9C6CD4AB4034921CF1E522E289F5D94FEA9D73F3</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>4d8cb80f-76c9-4535-aa00-044d90ec4a40_1.0.0.0_x86__xxmp1pvsnspr0</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>4d8cb80f-76c9-4535-aa00-044d90ec4a40_xxmp1pvsnspr0!App</RegisteredUserModeAppID>
     <RegisteredPackageID>4d8cb80f-76c9-4535-aa00-044d90ec4a40</RegisteredPackageID>
@@ -31,13 +31,13 @@
     <AppXManifest Include="D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-05-06T10:24:07.019</Modified>
+      <Modified>2017-05-13T07:41:03.401</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\ShowMeMyMoney.exe">
       <PackagePath>entrypoint\ShowMeMyMoney.exe</PackagePath>
-      <Modified>2017-05-06T10:24:06.708</Modified>
+      <Modified>2017-05-13T07:41:02.633</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Young\.nuget\packages\Microsoft.CSharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -102,6 +102,10 @@
     <AppxPackagedFile Include="C:\Users\Young\.nuget\packages\Newtonsoft.Json\9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
       <Modified>2016-06-13T15:06:14.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Young\.nuget\packages\NotificationsExtensions.Win10\14332.0.2\lib\uap10.0\NotificationsExtensions.Win10.dll">
+      <PackagePath>NotificationsExtensions.Win10.dll</PackagePath>
+      <Modified>2016-07-05T06:08:02.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Young\.nuget\packages\runtime.any.System.Private.DataContractSerialization\4.1.0\lib\netcore50\System.Private.DataContractSerialization.dll">
       <PackagePath>System.Private.DataContractSerialization.dll</PackagePath>
@@ -463,6 +467,10 @@
       <PackagePath>sqlite3.dll</PackagePath>
       <Modified>2017-04-09T16:04:24.408</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.10586.0\\redist\Debug\x86\ucrtbased.dll">
+      <PackagePath>ucrtbased.dll</PackagePath>
+      <Modified>2016-03-29T01:11:30.000</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Young\.nuget\packages\sqlitepcl\3.8.7.2\build\netcore451\SQLitePCL.Ext.dll">
       <PackagePath>SQLitePCL.Ext.dll</PackagePath>
       <Modified>2014-12-09T03:04:52.000</Modified>
@@ -507,7 +515,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\ShowMeMyMoney.xr.xml">
       <PackagePath>ShowMeMyMoney.xr.xml</PackagePath>
-      <Modified>2017-05-06T10:07:01.417</Modified>
+      <Modified>2017-05-13T07:41:02.406</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -516,14 +524,41 @@
     <AppxPackagedFile Include="D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-05-06T10:23:42.627</Modified>
+      <Modified>2017-05-13T07:41:03.160</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\Core\ShowMeMyMoney.exe">
       <PackagePath>ShowMeMyMoney.exe</PackagePath>
-      <Modified>2017-05-06T10:24:07.015</Modified>
+      <Modified>2017-05-13T07:41:03.397</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
+      <Name>Microsoft.VCLibs.140.00.Debug</Name>
+      <Version>14.0.25019.0</Version>
+      <Architecture>ARM</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.25019.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\ARM\Microsoft.VCLibs.ARM.Debug.14.00.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
+      <Name>Microsoft.VCLibs.140.00.Debug</Name>
+      <Version>14.0.25019.0</Version>
+      <Architecture>x64</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.25019.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\x64\Microsoft.VCLibs.x64.Debug.14.00.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
+      <Name>Microsoft.VCLibs.140.00.Debug</Name>
+      <Version>14.0.25019.0</Version>
+      <Architecture>x86</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.25019.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\x86\Microsoft.VCLibs.x86.Debug.14.00.appx</AppxLocation>
+      <MoreInfo>
+      </MoreInfo>
+    </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.NET.CoreRuntime\1.1\">
       <Name>Microsoft.NET.CoreRuntime.1.1</Name>
       <Version>1.1.25129.1</Version>

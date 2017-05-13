@@ -7,28 +7,28 @@ using System.Threading.Tasks;
 
 namespace ShowMeMyMoney.Model
 {
-     public class categoryItem
+    public class categoryItem
     {
         public string name { get; set; }
-        public int number { get; }
+        public long number { get; }
         public string color;
         public double share;/* 分类当前所占百分比 */
-        public double amount; /* 分类当前总额 */ 
+        public double amount; /* 分类当前总额 */
         public bool inOrOut;
         /* 0 表示支出，1表示收入*/
 
 
         [JsonConstructor]
-        public categoryItem(int i, string s,  double _share, string c, bool ioo)
+        public categoryItem(long i, string s, double _share, string c, bool ioo)
         {
             name = s;
-            number = Guid.NewGuid().GetHashCode()*(i+1);
+            number = Guid.NewGuid().GetHashCode() * (i + 1);
             color = c;
             share = _share;
             amount = 0;
             inOrOut = ioo;
         }
-        public categoryItem(string s, int i, string c)
+        public categoryItem(string s, long i, string c)
         {
             name = s;
             number = Guid.NewGuid().GetHashCode();
