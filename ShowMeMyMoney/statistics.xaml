@@ -1,0 +1,124 @@
+﻿<Page
+    x:Class="ShowMeMyMoney.statistics"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ShowMeMyMoney"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--可选按年/月份显示收支情况-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="选择显示" Grid.Column="0" Margin="50,20,4,20" HorizontalAlignment="Right"></TextBlock>
+            <ComboBox x:Name="chooseList" SelectionChanged="chooseList_SelectionChanged" Height="40" Margin="5,20,10,10" Width="50" Grid.Column="1">
+                <x:String>年</x:String>
+                <!--
+                <x:String>月</x:String>-->
+            </ComboBox>
+            <DatePicker x:Name="datePicker" Visibility="Visible" DayVisible="False" MonthVisible="False" Loaded="DatePicker_Loaded" MonthFormat="{}{month.solo.abbreviated} ( {month.integer} )" UseLayoutRounding="True" Grid.Column="2" MaxWidth="80" DropCompleted="DatePicker_DropCompleted"></DatePicker>
+        </Grid>
+
+        <!--条形图-->
+        <Grid Grid.Row="1" Visibility="Visible">
+
+            <TextBlock Text="收支展示" ></TextBlock>
+            <Canvas x:Name="year_cvs" Height="200" Width="380" Margin="30,100,20,20">
+                <Line x:Name="Yaxis" StrokeStartLineCap="Triangle" X1="0" Y1="-70" X2="0" Y2="200" Stroke="LightBlue" StrokeThickness="3"></Line>
+                <Line x:Name="Xaxis"  StrokeStartLineCap="Triangle" X1="0" Y1="200" X2="370" Y2="200" Stroke="LightBlue" StrokeThickness="3"></Line>
+                <!--箭头-->
+                <Line X1="0" Y1="-70" X2="-5" Y2="-60" Stroke="LightBlue" StrokeThickness="2"></Line>
+                <Line X1="0" Y1="-70" X2="5" Y2="-60" Stroke="LightBlue" StrokeThickness="2"></Line>
+                <Line X1="370" Y1="200" X2="363" Y2="195" Stroke="LightBlue" StrokeThickness="2"></Line>
+                <Line X1="370" Y1="200" X2="363" Y2="205" Stroke="LightBlue" StrokeThickness="2"></Line>
+                <TextBlock x:Name="x" Text="月" Canvas.Left="364" Canvas.Top="204"></TextBlock>
+                <TextBlock x:Name="y" Text="元" Canvas.Left="-24" Canvas.Top="-61" RenderTransformOrigin="0.52,0.5"></TextBlock>
+
+
+                <!--预算 Y = 200 - 预算/MAX,if MAX ≠ 0 
+                <Line x:Name="budget" X1="0" Y1="0" X2="370" Y2="0" Stroke="LightPink" StrokeThickness="4"></Line>
+                <Line x:Name="l0" X1="0" Y1="40" X2="370" Y2="40" Stroke="LightPink" StrokeThickness="1"></Line>
+                <Line x:Name="l1" X1="0" Y1="80" X2="370" Y2="80" Stroke="LightPink" StrokeThickness="1"></Line>
+                <Line x:Name="l2" X1="0" Y1="120" X2="370" Y2="120" Stroke="LightPink" StrokeThickness="1"></Line>
+                <Line x:Name="l3" X1="0" Y1="160" X2="370" Y2="160" Stroke="LightPink" StrokeThickness="1"></Line>
+                <Rectangle></Rectangle>-->
+
+                <!--支出
+                <Line x:Name="mon1" X1="10" X2="10" Y1="200"  Y2="196" Stroke="CadetBlue" StrokeThickness="10" ></Line>
+                <Line x:Name="mon2" X1="40" X2="40" Y1="200" Y2="190" Stroke="CadetBlue" StrokeThickness="10" ></Line>
+                <Line x:Name="mon3" X1="70" X2="70" Y1="200" Y2="190" Stroke="CadetBlue" StrokeThickness="10" ></Line>
+                <Line x:Name="mon4" X1="100" X2="100" Y1="200" Y2="190" Stroke="CadetBlue" StrokeThickness="10" ></Line>
+                <Line x:Name="mon5" X1="130" X2="130" Y1="200" Y2="190" Stroke="CadetBlue" StrokeThickness="10" ></Line>
+                <Line x:Name="mon6" X1="160" X2="160" Y1="200" Y2="190" Stroke="CadetBlue" StrokeThickness="10" ></Line>
+                <Line x:Name="mon7" X1="190" X2="190" Y1="200" Y2="190" Stroke="CadetBlue" StrokeThickness="10" ></Line>
+                <Line x:Name="mon8" X1="220" X2="220" Y1="200" Y2="190" Stroke="CadetBlue" StrokeThickness="10" ></Line>
+                <Line x:Name="mon9" X1="250" X2="250" Y1="200" Y2="190" Stroke="CadetBlue" StrokeThickness="10" ></Line>
+                <Line x:Name="mon10" X1="280" X2="280" Y1="200" Y2="190" Stroke="CadetBlue" StrokeThickness="10" ></Line>
+                <Line x:Name="mon11" X1="310" X2="310" Y1="200" Y2="190" Stroke="CadetBlue" StrokeThickness="10" ></Line>
+                <Line x:Name="mon12" X1="340" X2="340" Y1="200" Y2="190" Stroke="CadetBlue" StrokeThickness="10" ></Line>
+                -->
+
+                <!--收入
+                <Line x:Name="outlay1" X1="9" Y1="200" X2="11" Y2="200" Stroke="BlueViolet" StrokeThickness="6"></Line>
+                <Line x:Name="outlay2" X1="39" Y1="200" X2="69" Y2="200" Stroke="BlueViolet" StrokeThickness="2"></Line>
+                <Line x:Name="outlay3" X1="69" Y1="200" X2="99" Y2="200" Stroke="BlueViolet" StrokeThickness="2"></Line>
+                <Line x:Name="outlay4" X1="99" Y1="200" X2="101" Y2="200" Stroke="BlueViolet" StrokeThickness="2"></Line>
+                <Line x:Name="outlay5" X1="129" Y1="200" X2="131" Y2="200" Stroke="BlueViolet" StrokeThickness="2"></Line>
+                <Line x:Name="outlay6" X1="159" Y1="200" X2="161" Y2="200" Stroke="BlueViolet" StrokeThickness="10"></Line>
+                <Line x:Name="outlay7" X1="189" Y1="200" X2="191" Y2="200" Stroke="BlueViolet" StrokeThickness="10"></Line>
+                <Line x:Name="outlay8" X1="219" Y1="200" X2="221" Y2="200" Stroke="BlueViolet" StrokeThickness="10"></Line>
+                <Line x:Name="outlay9" X1="249" Y1="200" X2="251" Y2="200" Stroke="BlueViolet" StrokeThickness="10"></Line>
+                <Line x:Name="outlay10" X1="279" Y1="200" X2="281" Y2="200" Stroke="BlueViolet" StrokeThickness="10"></Line>
+                <Line x:Name="outlay11" X1="309" Y1="200" X2="311" Y2="200" Stroke="BlueViolet" StrokeThickness="10"></Line>
+                <Line x:Name="outlay12" X1="339" Y1="200" X2="341" Y2="200" Stroke="BlueViolet" StrokeThickness="10"></Line>
+                -->
+            </Canvas>
+        </Grid>
+
+        <!--扇形图与详情-->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!--支出类别扇图-->
+            <Grid Grid.Column="0">
+
+            </Grid>
+
+            <!--收支概述-->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="allIn" Grid.Row="1" Grid.Column="1" Text="日常总收入:0.0元"></TextBlock>
+
+                <TextBlock x:Name="allOut" Grid.Row="2" Grid.Column="1" Text="日常总支出:0.0"></TextBlock>
+
+                <TextBlock x:Name="pcIn" Grid.Row="3" Grid.Column="1" Text="私房钱总收入：0.0元"></TextBlock>
+
+                <TextBlock x:Name="pcOut" Grid.Row="4" Grid.Column="1" Text="私房钱总支出:0.0元"></TextBlock>
+
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Page>

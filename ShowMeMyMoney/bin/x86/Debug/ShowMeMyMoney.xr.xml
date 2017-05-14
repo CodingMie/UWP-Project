@@ -35,6 +35,7 @@
       <RootProperty Name="TextAlignment" />
       <RootProperty Name="Name" />
       <RootProperty Name="Padding" />
+      <RootProperty Name="RenderTransformOrigin" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
       <RootProperty Name="HorizontalAlignment" />
@@ -55,6 +56,7 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Width" />
+      <RootProperty Name="Visibility" />
       <RootMethod Name="GetColumn" />
       <RootMethod Name="SetColumn" />
       <RootMethod Name="GetRow" />
@@ -180,6 +182,8 @@
       <RootProperty Name="Margin" />
       <RootProperty Name="SelectedItem" />
       <RootProperty Name="ItemTemplate" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Items" />
       <RootEvent Name="SelectionChanged" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
@@ -195,6 +199,14 @@
       <RootProperty Name="Margin" />
       <RootProperty Name="Header" />
       <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="DayVisible" />
+      <RootProperty Name="MonthVisible" />
+      <RootProperty Name="MonthFormat" />
+      <RootProperty Name="UseLayoutRounding" />
+      <RootProperty Name="MaxWidth" />
+      <RootEvent Name="Loaded" />
+      <RootEvent Name="DropCompleted" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.NullExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.CheckBox">
@@ -223,10 +235,27 @@
       <RootProperty Name="Margin" />
       <RootEvent Name="ValueChanged" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.Image">
-      <RootProperty Name="Name" />
-      <RootProperty Name="Source" />
-    </RootType>
     <RootType FullName="ShowMeMyMoney.MainPage" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Canvas">
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Children" />
+      <RootMethod Name="GetLeft" />
+      <RootMethod Name="SetLeft" />
+      <RootMethod Name="GetTop" />
+      <RootMethod Name="SetTop" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Shapes.Line">
+      <RootProperty Name="StrokeStartLineCap" />
+      <RootProperty Name="X1" />
+      <RootProperty Name="Y1" />
+      <RootProperty Name="X2" />
+      <RootProperty Name="Y2" />
+      <RootProperty Name="Stroke" />
+      <RootProperty Name="StrokeThickness" />
+    </RootType>
+    <RootType FullName="System.String" />
+    <RootType FullName="ShowMeMyMoney.statistics" />
   </Roots.RootTypes>
 </Roots>

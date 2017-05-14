@@ -132,7 +132,7 @@ namespace ShowMeMyMoney.ShowMeMyMoney_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[8];
+            _typeNameTable = new string[9];
             _typeNameTable[0] = "ShowMeMyMoney.Converters.AmountDisplayCvt";
             _typeNameTable[1] = "Object";
             _typeNameTable[2] = "ShowMeMyMoney.Converters.DateDisplayCvt";
@@ -141,8 +141,9 @@ namespace ShowMeMyMoney.ShowMeMyMoney_XamlTypeInfo
             _typeNameTable[5] = "Windows.UI.Xaml.Controls.UserControl";
             _typeNameTable[6] = "ShowMeMyMoney.Account";
             _typeNameTable[7] = "ShowMeMyMoney.MainPage";
+            _typeNameTable[8] = "ShowMeMyMoney.statistics";
 
-            _typeTable = new global::System.Type[8];
+            _typeTable = new global::System.Type[9];
             _typeTable[0] = typeof(global::ShowMeMyMoney.Converters.AmountDisplayCvt);
             _typeTable[1] = typeof(global::System.Object);
             _typeTable[2] = typeof(global::ShowMeMyMoney.Converters.DateDisplayCvt);
@@ -151,6 +152,7 @@ namespace ShowMeMyMoney.ShowMeMyMoney_XamlTypeInfo
             _typeTable[5] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
             _typeTable[6] = typeof(global::ShowMeMyMoney.Account);
             _typeTable[7] = typeof(global::ShowMeMyMoney.MainPage);
+            _typeTable[8] = typeof(global::ShowMeMyMoney.statistics);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -190,6 +192,7 @@ namespace ShowMeMyMoney.ShowMeMyMoney_XamlTypeInfo
         private object Activate_3_AccountsListViewPage() { return new global::ShowMeMyMoney.AccountsListViewPage(); }
         private object Activate_6_Account() { return new global::ShowMeMyMoney.Account(); }
         private object Activate_7_MainPage() { return new global::ShowMeMyMoney.MainPage(); }
+        private object Activate_8_statistics() { return new global::ShowMeMyMoney.statistics(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -244,6 +247,13 @@ namespace ShowMeMyMoney.ShowMeMyMoney_XamlTypeInfo
             case 7:   //  ShowMeMyMoney.MainPage
                 userType = new global::ShowMeMyMoney.ShowMeMyMoney_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_7_MainPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 8:   //  ShowMeMyMoney.statistics
+                userType = new global::ShowMeMyMoney.ShowMeMyMoney_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_8_statistics;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;

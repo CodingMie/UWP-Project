@@ -11,7 +11,7 @@
 
     <Page.Resources>
         <Style x:ConnectionId='2' x:Name="myTitle" TargetType="TextBlock">
-            <Setter Property="Foreground"  Value="CadetBlue"/>
+            <Setter Property="Foreground"  Value="DodgerBlue"/>
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="FontFamily" Value="Arial" />
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -65,7 +65,6 @@
 
                                 <TextBlock HorizontalAlignment="Center" Text="Categories" Height="50"
                                            Foreground="LightSalmon" FontSize="20" FontWeight="Bold"/>
-
                                 <StackPanel Height="30"/>
                                 <StackPanel Height="30">
                                     <TextBlock Height="30" Text="支出" HorizontalAlignment="Center" 
@@ -85,7 +84,6 @@
                                             </Border>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
-
                                 </ListView>
 
                                 <StackPanel Height="30" />
@@ -109,8 +107,7 @@
                                     </ListView.ItemTemplate>
 
                                 </ListView>
-
-
+                                
                             </StackPanel>
                         </Border>
 
@@ -162,7 +159,7 @@
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="详细信息" 
-                           Foreground="Teal" FontSize="20" Margin="20"/>
+                           Foreground="DodgerBlue" FontSize="20" Margin="20"/>
                         <AppBarButton Icon="Setting" IsCompact="True" Margin="200,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <AppBarButton.Flyout>
                                 <MenuFlyout>
@@ -185,17 +182,17 @@
                                 <ColumnDefinition Width="5*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="类型：" Foreground="CadetBlue"/>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="类型：" Foreground="DodgerBlue"/>
                             <TextBlock x:ConnectionId='17' x:Name="category0" Grid.Row="0" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
-                            <TextBlock Grid.Row="2" Grid.Column="0" Text="金额：" Foreground="CadetBlue"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="金额：" Foreground="DodgerBlue"/>
                             <TextBlock x:ConnectionId='18' x:Name="amount0" Grid.Row="2" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="收入或支出：" Foreground="CadetBlue" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="收入或支出：" Foreground="DodgerBlue" />
                             <TextBlock x:ConnectionId='19' x:Name="inOrOut0" Grid.Row="1" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
-                            <TextBlock Grid.Row="3" Grid.Column="0" Text="详情：" Foreground="CadetBlue"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="详情：" Foreground="DodgerBlue"/>
                             <TextBlock x:ConnectionId='20' x:Name="description0" Grid.Row="3" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
-                            <TextBlock Grid.Row="4" Grid.Column="0" Text="是否私房钱：" Foreground="CadetBlue"/>
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="是否私房钱：" Foreground="DodgerBlue"/>
                             <TextBlock x:ConnectionId='21' x:Name ="isPocketMoney0" Grid.Row="4" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
-                            <TextBlock Grid.Row="5" Grid.Column="0" Text="日期：" Foreground="CadetBlue"/>
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="日期：" Foreground="DodgerBlue"/>
                             <TextBlock x:ConnectionId='22' x:Name ="date0" Grid.Row="5" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
 
                         </Grid>
@@ -212,7 +209,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="详细信息" 
-                           Foreground="Teal" FontSize="20" Margin="20"/>
+                           Foreground="DodgerBlue" FontSize="20" Margin="20"/>
                 <AppBarButton Icon="Setting" IsCompact="True" Margin="200,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <AppBarButton.Flyout>
                         <MenuFlyout>
@@ -235,17 +232,17 @@
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="类型：" Foreground="CadetBlue"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="类型：" Foreground="DodgerBlue"/>
                     <TextBlock x:ConnectionId='8' x:Name="category" Grid.Row="0" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="金额：" Foreground="CadetBlue"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="金额：" Foreground="DodgerBlue"/>
                     <TextBlock x:ConnectionId='9' x:Name="amount" Grid.Row="2" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="收入或支出：" Foreground="CadetBlue" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="收入或支出：" Foreground="DodgerBlue" />
                     <TextBlock x:ConnectionId='10' x:Name="inOrOut" Grid.Row="1" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="详情：" Foreground="CadetBlue"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="详情：" Foreground="DodgerBlue"/>
                     <TextBlock x:ConnectionId='11' x:Name="description" Grid.Row="3" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="是否私房钱：" Foreground="CadetBlue"/>
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="是否私房钱：" Foreground="DodgerBlue"/>
                     <TextBlock x:ConnectionId='12' x:Name ="isPocketMoney" Grid.Row="4" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="5" Grid.Column="0" Text="日期：" Foreground="CadetBlue"/>
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="日期：" Foreground="DodgerBlue"/>
                     <TextBlock x:ConnectionId='13' x:Name ="date" Grid.Row="5" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
 
                 </Grid>
