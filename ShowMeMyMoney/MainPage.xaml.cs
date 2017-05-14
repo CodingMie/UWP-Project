@@ -26,6 +26,7 @@ using NotificationsExtensions;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
+using System.Text.RegularExpressions;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -74,12 +75,12 @@ namespace ShowMeMyMoney
             TotalExpenseAmount.Text = totalExpense.ToString();
             TotalIncomeAmount.Text = totalIncome.ToString();
             PocketMoneyAmount.Text = totalPocketMoney.ToString();
-            TotalBudgetProportion.Text = "已使用" + totalExpense / monthlyBudget + "%";
-            if (totalExpense / monthlyBudget < 20)
+            TotalBudgetProportion.Text = "已使用" + Math.Truncate(totalExpense / monthlyBudget * 100 )+ "%";
+            if (totalExpense / monthlyBudget < 0.35)
             {
                 pic.Source = new BitmapImage(new Uri("ms-appx:///Assets/pic3.jpg", UriKind.RelativeOrAbsolute));
             }
-            else if (totalExpense / monthlyBudget < 50)
+            else if (totalExpense / monthlyBudget < 0.7)
             {
                 pic.Source = new BitmapImage(new Uri("ms-appx:///Assets/pic2.jpg", UriKind.RelativeOrAbsolute));
             }
@@ -388,6 +389,40 @@ namespace ShowMeMyMoney
             DataTransferManager.ShowShareUI();
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (Regex.IsMatch(newAmount.Text, @"^(-?\d+)(\.\d+)?$"))
+           {
+                BudgetAmount.Text = newAmount.Text;
+                monthlyBudget = Double.Parse( BudgetAmount.Text);
+                writeMetadataToFile();
+                updateMetadataViews();
+                BudgetFlyout.Hide();
+                newAmount.Text = "";
+            }
+        }
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (Regex.IsMatch(PocketAmount.Text, @"^(-?\d+)(\.\d+)?$"))
+            {
+                PocketMoneyAmount.Text = PocketAmount.Text;
+                totalPocketMoney = Double.Parse(PocketMoneyAmount.Text);
+                writeMetadataToFile();
+                updateMetadataViews();
+                PocketMoneyFlyout.Hide();
+                PocketAmount.Text = "";
+            }
+        }
+        private void cancl_Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            newAmount.Text = "";
+            BudgetFlyout.Hide();
+        }
+        private void cancl_Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            PocketAmount.Text = "";
+            PocketMoneyFlyout.Hide();
+        }
         private void out_Checked(object sender, RoutedEventArgs e)
         {
             shareSlider.Visibility = Visibility.Visible;
