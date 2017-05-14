@@ -61,7 +61,7 @@ namespace ShowMeMyMoney
             string uri = "ms-appx://" + ((BitmapImage)pic.Source).UriSource.LocalPath;
             var img = await StorageFile.GetFileFromApplicationUriAsync(new Uri(uri));
             dp.Properties.Title = "【紧急求助】";
-           // dp.SetText(ViewModel.SelectedItem.description + "\nFrom TODOs");
+            dp.SetText("本月" + TotalBudgetProportion.Text + ","+ totalExpense + "元，" + "\nFrom ShowMeMyMoney");
             dp.SetStorageItems(new List<StorageFile> { img });
             deferral.Complete();
 

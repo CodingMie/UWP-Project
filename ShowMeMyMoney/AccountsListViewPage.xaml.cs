@@ -110,6 +110,7 @@ namespace ShowMeMyMoney
             if (ViewModel.SelectedItem != null)
             {
                 ViewModel.RemoveAccountItem(ViewModel.SelectedItem.id);
+                categoryViewModel.UpdateCategoryByAccount(ViewModel.SelectedItem, false);
                 ViewModel.SelectedItem = null;
                 category.Text = category0.Text = "";
                 amount.Text = amount0.Text = "";

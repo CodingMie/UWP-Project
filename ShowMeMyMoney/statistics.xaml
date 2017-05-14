@@ -33,7 +33,7 @@
         <!--条形图-->
         <Grid Grid.Row="1" Visibility="Visible">
 
-            <TextBlock Text="收支展示" ></TextBlock>
+            <TextBlock HorizontalAlignment="Center" Text="收支展示" ></TextBlock>
             <Canvas x:Name="year_cvs" Height="200" Width="380" Margin="30,100,20,20">
                 <Line x:Name="Yaxis" StrokeStartLineCap="Triangle" X1="0" Y1="-70" X2="0" Y2="200" Stroke="LightBlue" StrokeThickness="3"></Line>
                 <Line x:Name="Xaxis"  StrokeStartLineCap="Triangle" X1="0" Y1="200" X2="370" Y2="200" Stroke="LightBlue" StrokeThickness="3"></Line>
