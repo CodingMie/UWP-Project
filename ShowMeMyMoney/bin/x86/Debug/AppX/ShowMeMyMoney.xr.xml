@@ -27,6 +27,7 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Text" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="TextWrapping" />
       <RootProperty Name="Style" />
       <RootProperty Name="Height" />
       <RootProperty Name="FontWeight" />
@@ -82,15 +83,16 @@
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Width" />
-      <RootProperty Name="Height" />
+      <RootProperty Name="MinHeight" />
       <RootProperty Name="Background" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Children" />
       <RootProperty Name="Orientation" />
-      <RootProperty Name="MinHeight" />
+      <RootProperty Name="Height" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />
+      <RootProperty Name="MinHeight" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.AppBarButton">
       <RootProperty Name="Icon" />

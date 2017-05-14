@@ -125,7 +125,7 @@ namespace ShowMeMyMoney.Services
                     =======*/
                     int k = 1;
                     //>>>>>> 714ed49f59e4e0edee427eaacafa0d48b29c3316
-                    i.amount = (double)statement[k++];
+                    i.amount = Math.Abs((double)statement[k++]);
                     i.createDate = DateTimeOffset.Parse((string)statement[k++]);
                     i.category = (long)statement[k++];
                     i.isPocketMoney = ((long)statement[k++] == 0) ? false : true;

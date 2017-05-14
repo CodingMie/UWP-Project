@@ -81,12 +81,13 @@ namespace ShowMeMyMoney
         {
             ViewModel.SelectedItem = (accountItem)(e.ClickedItem);
             category.Text = category0.Text = categoryViewModel.SelectedCategory.name;
-            amount.Text = amount0.Text = ViewModel.SelectedItem.amount + "元";
+            amount.Text = amount0.Text = Math.Abs(ViewModel.SelectedItem.amount) + "元";
             inOrOut.Text = inOrOut0.Text = (ViewModel.SelectedItem.inOrOut) ? "收入" : "支出";
             description.Text = description0.Text = ViewModel.SelectedItem.description;
             date.Text = date0.Text = ViewModel.SelectedItem.createDate.Year + "年"
                     + ViewModel.SelectedItem.createDate.Month + "月"
                     + ViewModel.SelectedItem.createDate.Day + "日";
+            isPocketMoney.Text = isPocketMoney0.Text = ViewModel.SelectedItem.isPocketMoney ? "是" : "否";
         }
 
 
@@ -107,11 +108,12 @@ namespace ShowMeMyMoney
             {
                 ViewModel.RemoveAccountItem(ViewModel.SelectedItem.id);
                 ViewModel.SelectedItem = null;
-                category.Text = "";
-                amount.Text = "";
-                inOrOut.Text = "";
-                description.Text = "";
-                date.Text = "";
+                category.Text = category0.Text = "";
+                amount.Text = amount0.Text = "";
+                inOrOut.Text = inOrOut0.Text = "";
+                description.Text = description0.Text = "";
+                date.Text = date0.Text = "";
+                isPocketMoney.Text = isPocketMoney0.Text = "";
             }
         }
         

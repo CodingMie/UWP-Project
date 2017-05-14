@@ -155,7 +155,7 @@
                     </StackPanel>
                 </StackPanel>
 
-                <StackPanel x:Name="details_bottom" HorizontalAlignment="Center" Width="400" Height="300" Grid.Column="1" Background="AliceBlue" Margin="15,10,10,10">
+                <StackPanel x:Name="details_bottom" HorizontalAlignment="Center" Width="400" MinHeight="300" Grid.Column="1" Background="AliceBlue" Margin="15,10,10,10">
                     <Grid Margin="30">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="60"/>
@@ -173,27 +173,30 @@
                         </AppBarButton>
                         <Grid Grid.Row="1">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="30"/>
+                                <RowDefinition MinHeight="30"/>
+                                <RowDefinition MinHeight="30"/>
+                                <RowDefinition MinHeight="30"/>
+                                <RowDefinition MinHeight="30"/>
+                                <RowDefinition MinHeight="30"/>
+                                <RowDefinition MinHeight="30"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="5*"/>
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="类型：" Foreground="CadetBlue"/>
-                            <TextBlock x:Name="category0" Grid.Row="0" Grid.Column="1" Foreground="LightSeaGreen"/>
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="金额：" Foreground="CadetBlue"/>
-                            <TextBlock x:Name="amount0" Grid.Row="1" Grid.Column="1" Foreground="LightSeaGreen"/>
-                            <TextBlock Grid.Row="2" Grid.Column="0" Text="收入：" Foreground="CadetBlue" />
-                            <TextBlock x:Name="inOrOut0" Grid.Row="2" Grid.Column="1" Foreground="LightSeaGreen"/>
+                            <TextBlock x:Name="category0" Grid.Row="0" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="金额：" Foreground="CadetBlue"/>
+                            <TextBlock x:Name="amount0" Grid.Row="2" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="收入或支出：" Foreground="CadetBlue" />
+                            <TextBlock x:Name="inOrOut0" Grid.Row="1" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
                             <TextBlock Grid.Row="3" Grid.Column="0" Text="详情：" Foreground="CadetBlue"/>
-                            <TextBlock x:Name="description0" Grid.Row="3" Grid.Column="1" Foreground="LightSeaGreen"/>
-                            <TextBlock Grid.Row="4" Grid.Column="0" Text="日期：" Foreground="CadetBlue"/>
-                            <TextBlock x:Name ="date0" Grid.Row="4" Grid.Column="1" Foreground="LightSeaGreen"/>
+                            <TextBlock x:Name="description0" Grid.Row="3" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="是否私房钱：" Foreground="CadetBlue"/>
+                            <TextBlock x:Name ="isPocketMoney0" Grid.Row="4" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="日期：" Foreground="CadetBlue"/>
+                            <TextBlock x:Name ="date0" Grid.Row="5" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
 
                         </Grid>
                     </Grid>
@@ -202,7 +205,7 @@
             </StackPanel>
         </ScrollViewer>
 
-        <StackPanel x:Name="details" HorizontalAlignment="Center" Width="400" Height="300" Grid.Column="1" Background="AliceBlue" Margin="15,10,10,10">
+        <StackPanel x:Name="details" HorizontalAlignment="Center" Width="400" MinHeight="300" Grid.Column="1" Background="AliceBlue" Margin="15,10,10,10">
             <Grid Margin="30">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
@@ -220,27 +223,30 @@
                 </AppBarButton>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition MinHeight="30"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="类型：" Foreground="CadetBlue"/>
-                    <TextBlock x:Name="category" Grid.Row="0" Grid.Column="1" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="金额：" Foreground="CadetBlue"/>
-                    <TextBlock x:Name="amount" Grid.Row="1" Grid.Column="1" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="收入：" Foreground="CadetBlue" />
-                    <TextBlock x:Name="inOrOut" Grid.Row="2" Grid.Column="1" Foreground="LightSeaGreen"/>
+                    <TextBlock x:Name="category" Grid.Row="0" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="金额：" Foreground="CadetBlue"/>
+                    <TextBlock x:Name="amount" Grid.Row="2" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="收入或支出：" Foreground="CadetBlue" />
+                    <TextBlock x:Name="inOrOut" Grid.Row="1" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="详情：" Foreground="CadetBlue"/>
-                    <TextBlock x:Name="description" Grid.Row="3" Grid.Column="1" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="日期：" Foreground="CadetBlue"/>
-                    <TextBlock x:Name ="date" Grid.Row="4" Grid.Column="1" Foreground="LightSeaGreen"/>
+                    <TextBlock x:Name="description" Grid.Row="3" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="是否私房钱：" Foreground="CadetBlue"/>
+                    <TextBlock x:Name ="isPocketMoney" Grid.Row="4" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="日期：" Foreground="CadetBlue"/>
+                    <TextBlock x:Name ="date" Grid.Row="5" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
 
                 </Grid>
             </Grid>

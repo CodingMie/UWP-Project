@@ -28,13 +28,13 @@
     <AppXManifest Include="G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-05-14T02:57:58.206</Modified>
+      <Modified>2017-05-14T04:29:21.302</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\bin\x86\Debug\ShowMeMyMoney.exe">
       <PackagePath>entrypoint\ShowMeMyMoney.exe</PackagePath>
-      <Modified>2017-05-14T02:57:57.492</Modified>
+      <Modified>2017-05-14T04:29:20.944</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\gdsgw\.nuget\packages\Microsoft.CSharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -512,7 +512,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\bin\x86\Debug\ShowMeMyMoney.xr.xml">
       <PackagePath>ShowMeMyMoney.xr.xml</PackagePath>
-      <Modified>2017-05-14T02:50:44.949</Modified>
+      <Modified>2017-05-14T04:27:39.470</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -521,11 +521,11 @@
     <AppxPackagedFile Include="G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-05-14T02:57:57.943</Modified>
+      <Modified>2017-05-14T04:27:40.160</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\bin\x86\Debug\Core\ShowMeMyMoney.exe">
       <PackagePath>ShowMeMyMoney.exe</PackagePath>
-      <Modified>2017-05-14T02:57:58.203</Modified>
+      <Modified>2017-05-14T04:29:21.298</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
