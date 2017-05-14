@@ -29,6 +29,7 @@ namespace ShowMeMyMoney
     {
         private ViewModel.ViewModel AccountViewModel;
         private ViewModel.categoryViewModel CategoryViewModel;
+        private bool isUpdate = false;
         public Account()
         {
 
@@ -53,9 +54,15 @@ namespace ShowMeMyMoney
             expense.IsChecked = true;
             if (AccountViewModel != null && AccountViewModel.SelectedItem != null)
             {
+                isUpdate = true;
+                var a = AccountViewModel.SelectedItem;
+                Amount.Text = a.amount.ToString();
+                income.IsChecked = a.inOrOut;
+                expense.IsChecked = !a.inOrOut;
+                PocketMoney.IsChecked = a.isPocketMoney;
+                Description.Text = a.description;
+                Date.Date = a.createDate;
             }
-
-
         }
         private bool checkInput()
         {
@@ -89,7 +96,11 @@ namespace ShowMeMyMoney
         private void createButton_Click(object sender, RoutedEventArgs e)
         {
             if (!checkInput()) return;
-
+            if (isUpdate)
+            {
+                CategoryViewModel.UpdateCategoryByAccount(AccountViewModel.SelectedItem, false);
+                AccountViewModel.RemoveAccountItem(AccountViewModel.SelectedItem.id);
+            }
             bool expenseOrIncome = expense.IsChecked == true ? false : true;
 
             string category = expenseOrIncome ? ((categoryItem)IncomeCategory.SelectedItem).name : ((categoryItem)ExpenseCategory.SelectedItem).name;
@@ -111,7 +122,7 @@ namespace ShowMeMyMoney
             AccountViewModel.AddAccountItem(categoryNum, date, amount, isPocketMoney, expenseOrIncome, description);
 
             /* 修改分类总额 */
-            CategoryViewModel.UpdateCategoryByAccount(newAccount);
+            CategoryViewModel.UpdateCategoryByAccount(newAccount, true);
 
             /* 发送修改后的viewmodel到主页*/
             Frame.Navigate(typeof(MainPage), CategoryViewModel);

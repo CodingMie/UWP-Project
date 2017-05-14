@@ -74,8 +74,8 @@ namespace ShowMeMyMoney.ViewModel
         }
         private async void readFromTable(string nameOfTable)
         {
-            try
-            {
+          //  try
+            //{
                 /*  读取json文件  */
                 var Folder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 var item = await Folder.TryGetItemAsync(nameOfTable + ".json");
@@ -108,14 +108,14 @@ namespace ShowMeMyMoney.ViewModel
                             allIncomeCatagoryItems.Add(i);
                     }
                 }
-            }
-            catch (Exception e)
+         //   }
+         /*   catch (Exception e)
             {
                 throw e;
-            }
+            }*/
         }
 
-        internal void UpdateCategoryByAccount(accountItem account)
+        internal void UpdateCategoryByAccount(accountItem account, bool addOrDel)
         {
             bool expenseOrIncome = account.inOrOut;
             var items = expenseOrIncome ? allIncomeCatagoryItems : allExpenseCatagoryItems;
@@ -125,7 +125,14 @@ namespace ShowMeMyMoney.ViewModel
             {
                  if (account.category == i.number)
                 {
-                    i.amount += account.amount;
+                    if (addOrDel)
+                    {
+                        i.amount += account.amount;
+                    }
+                    else
+                    {
+                        i.amount -= account.amount;
+                    }
                     saveCategoryTable(expenseOrIncome);
                     return;
                 }

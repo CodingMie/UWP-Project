@@ -24,6 +24,8 @@ using Windows.UI.Notifications;
 using NotificationsExtensions.Tiles;
 using NotificationsExtensions;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Storage;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -45,6 +47,21 @@ namespace ShowMeMyMoney
             initializeShareSlider();
             initializeShareBar();
             createTile();
+            DataTransferManager DataTrans = DataTransferManager.GetForCurrentView();
+            DataTrans.DataRequested += OnShareDataRequested;
+        }
+
+        async void OnShareDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            var dp = args.Request.Data;
+            var deferral = args.Request.GetDeferral();
+            string uri = "ms-appx://" + ((BitmapImage)pic.Source).UriSource.LocalPath;
+            var img = await StorageFile.GetFileFromApplicationUriAsync(new Uri(uri));
+            dp.Properties.Title = "【紧急求助】";
+           // dp.SetText(ViewModel.SelectedItem.description + "\nFrom TODOs");
+            dp.SetStorageItems(new List<StorageFile> { img });
+            deferral.Complete();
+
         }
         private void updateMetadataViews()
         {
@@ -221,8 +238,14 @@ namespace ShowMeMyMoney
             {
                 readMetadataFromFile();
             }
+            DataTransferManager DataTrans = DataTransferManager.GetForCurrentView();
+            DataTrans.DataRequested += OnShareDataRequested;
         }
-
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            DataTransferManager DataTrans = DataTransferManager.GetForCurrentView();
+            DataTrans.DataRequested -= OnShareDataRequested;
+        }
 
 
         private void ShowCategory_Click(object sender, ItemClickEventArgs e)
@@ -240,28 +263,17 @@ namespace ShowMeMyMoney
         {
             ContentDialog dialog = AddNewCategoryDialog;
             shareSlider.Header = "# 所占预算比例，还剩" + remainedProportion + "%可用";
+            expenseButton.IsChecked = false;
+            incomeButton.IsChecked = false;
+            categoryName.Text = "";
+            shareSlider.Value = 0;
+            ColorPallete_Combo.SelectedIndex = -1;
+
             await dialog.ShowAsync();
         }
 
         private async void AddNewCategoryDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            /*
-            if (remainedProportion < Convert.ToDouble(categoryShare.Text))
-            {
-               //  /* 判断新添加的分类比例是否合法 
-                AddNewCategoryDialog.Hide();
-                ContentDialog alert = new ContentDialog()
-                {
-                    Title = "错误提示",
-                    Content = "新设置的比例太大啦！只剩" + remainedProportion + "%可用。",
-                    IsPrimaryButtonEnabled = true,
-                    PrimaryButtonText = "OK"
-
-                };
-                await alert.ShowAsync();
-                return;
-            } 
-        */
             /* 确定收入还是支出 */
 
             bool incomeOrExpense = incomeButton.IsChecked == true ? true : false;
@@ -354,6 +366,11 @@ namespace ShowMeMyMoney
             shareSlider.Maximum = remainedProportion;
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DataTransferManager.ShowShareUI();
+        }
+
         private void out_Checked(object sender, RoutedEventArgs e)
         {
             shareSlider.Visibility = Visibility.Visible;
@@ -364,6 +381,7 @@ namespace ShowMeMyMoney
             shareSlider.Visibility = Visibility.Collapsed;
         }
 
+        //  创建磁贴
         public void createTile()
         {
             string from = (monthlyBudget+totalIncome-totalExpense).ToString();
