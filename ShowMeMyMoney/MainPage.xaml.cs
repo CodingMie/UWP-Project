@@ -360,7 +360,11 @@ namespace ShowMeMyMoney
         {
             /* 好像不需要干嘛 */
         }
-
+        private void viewStatisticsButton_Click(object sender, RoutedEventArgs e)
+        {
+            /* 跳转到统计页 */
+            Frame.Navigate(typeof(statistics));
+        }
         private void initializeShareSlider()
         {
             shareSlider.Maximum = remainedProportion;

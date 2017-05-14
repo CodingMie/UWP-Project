@@ -172,7 +172,10 @@
                     <AppBarButton x:Name="AddNewAccountButton" Label="添加新记录"
                           Click="AddNewAccountButton_Click"
                      Icon="Add" Width="109"></AppBarButton>
-
+                     
+                <AppBarButton x:Name="viewStatisticsButton" Label="查看统计"
+                          Click="viewStatisticsButton_Click"
+                              Icon="FourBars" Width="109"></AppBarButton>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
