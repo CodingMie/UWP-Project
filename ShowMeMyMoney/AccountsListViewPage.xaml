@@ -51,37 +51,37 @@
         <ScrollViewer  x:Name="main" Margin="0,0,10,0">
             <StackPanel HorizontalAlignment="Center" Grid.Column="0">
                 <StackPanel HorizontalAlignment="Center" Margin="15,10,10,10"
-                    Background="AliceBlue">
+                            Background="AliceBlue">
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" 
-                       Text="分类收支详情" Style = "{StaticResource myTitle}"/>
+                               Text="分类收支详情" Style = "{StaticResource myTitle}"/>
 
                     <StackPanel Orientation="Horizontal">
 
                         <Border BorderBrush="LightSalmon" BorderThickness="1" Margin="10"  
-                            HorizontalAlignment="Center" VerticalAlignment="Top"
-                            Width="auto" Height="auto">
+                                HorizontalAlignment="Center" VerticalAlignment="Top"
+                                Width="auto" Height="auto">
 
                             <StackPanel Margin="5" Width="110">
 
                                 <TextBlock HorizontalAlignment="Center" Text="Categories" Height="50"
-                                   Foreground="LightSalmon" FontSize="20" FontWeight="Bold"/>
+                                           Foreground="LightSalmon" FontSize="20" FontWeight="Bold"/>
 
                                 <StackPanel Height="30"/>
                                 <StackPanel Height="30">
                                     <TextBlock Height="30" Text="支出" HorizontalAlignment="Center" 
-                                       FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
+                                               FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
                                 </StackPanel>
 
                                 <ListView x:Name="ExpenseList" ItemsSource="{x:Bind categoryViewModel.AllExpenseCatagoryItems}"
-                            IsItemClickEnabled="True" ItemClick="categoryItemClicked">
+                                          SelectionMode="None" IsItemClickEnabled="True" ItemClick="categoryItemClicked">
                                     <ListView.ItemTemplate>
                                         <DataTemplate x:DataType="md:categoryItem">
                                             <Border Background="{x:Bind color}" BorderThickness="1"  
-                                            HorizontalAlignment="Center" VerticalAlignment="Center"
-                                            Width="100" Height="30">
+                                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                    Width="100" Height="30">
                                                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                                   Foreground="White" Width="80" Text="{x:Bind name}" 
-                                                   TextAlignment="Center"/>
+                                                           Foreground="White" Width="80" Text="{x:Bind name}" 
+                                                           TextAlignment="Center"/>
                                             </Border>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
@@ -91,16 +91,16 @@
                                 <StackPanel Height="30" />
                                 <StackPanel Height="30">
                                     <TextBlock Height="30" Text="收入" HorizontalAlignment="Center" 
-                                       FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
+                                               FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
                                 </StackPanel>
 
                                 <ListView ItemsSource="{x:Bind categoryViewModel.AllIncomeCatagoryItems}"
-                            IsItemClickEnabled="True" ItemClick="categoryItemClicked">
+                                          SelectionMode="None" IsItemClickEnabled="True" ItemClick="categoryItemClicked">
                                     <ListView.ItemTemplate>
                                         <DataTemplate x:DataType="md:categoryItem">
                                             <Border Background="{x:Bind color}" BorderThickness="1"  
-                                            HorizontalAlignment="Center" VerticalAlignment="Center"
-                                            Width="100" Height="30">
+                                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                    Width="100" Height="30">
                                                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
                                                        Foreground="White" Width="80" Text="{x:Bind name}" 
                                                        TextAlignment="Center"/>

@@ -95,10 +95,13 @@ namespace ShowMeMyMoney
         // edit the item
         private void edit_click(object sender, RoutedEventArgs e)
         {
-            ArrayList list = new ArrayList();
-            list.Add(ViewModel);
-            list.Add(categoryViewModel);
-            Frame.Navigate(typeof(Account), list);
+            if (ViewModel.SelectedItem != null)
+            {
+                ArrayList list = new ArrayList();
+                list.Add(ViewModel);
+                list.Add(categoryViewModel);
+                Frame.Navigate(typeof(Account), list);
+            }
         }
 
         //delete the item

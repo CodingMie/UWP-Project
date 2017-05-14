@@ -51,37 +51,37 @@
         <ScrollViewer x:ConnectionId='6'  x:Name="main" Margin="0,0,10,0">
             <StackPanel HorizontalAlignment="Center" Grid.Column="0">
                 <StackPanel HorizontalAlignment="Center" Margin="15,10,10,10"
-                    Background="AliceBlue">
+                            Background="AliceBlue">
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" 
-                       Text="分类收支详情" Style = "{StaticResource myTitle}"/>
+                               Text="分类收支详情" Style = "{StaticResource myTitle}"/>
 
                     <StackPanel Orientation="Horizontal">
 
                         <Border BorderBrush="LightSalmon" BorderThickness="1" Margin="10"  
-                            HorizontalAlignment="Center" VerticalAlignment="Top"
-                            Width="auto" Height="auto">
+                                HorizontalAlignment="Center" VerticalAlignment="Top"
+                                Width="auto" Height="auto">
 
                             <StackPanel Margin="5" Width="110">
 
                                 <TextBlock HorizontalAlignment="Center" Text="Categories" Height="50"
-                                   Foreground="LightSalmon" FontSize="20" FontWeight="Bold"/>
+                                           Foreground="LightSalmon" FontSize="20" FontWeight="Bold"/>
 
                                 <StackPanel Height="30"/>
                                 <StackPanel Height="30">
                                     <TextBlock Height="30" Text="支出" HorizontalAlignment="Center" 
-                                       FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
+                                               FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
                                 </StackPanel>
 
                                 <ListView x:ConnectionId='26' x:Name="ExpenseList"                                                                 
-                            IsItemClickEnabled="True"                                >
+                                          SelectionMode="None" IsItemClickEnabled="True"                                >
                                     <ListView.ItemTemplate>
                                         <DataTemplate                             >
                                             <Border x:ConnectionId='30'                             BorderThickness="1"  
-                                            HorizontalAlignment="Center" VerticalAlignment="Center"
-                                            Width="100" Height="30">
+                                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                    Width="100" Height="30">
                                                 <TextBlock x:ConnectionId='31' HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                                   Foreground="White" Width="80"                      
-                                                   TextAlignment="Center"/>
+                                                           Foreground="White" Width="80"                      
+                                                           TextAlignment="Center"/>
                                             </Border>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
@@ -91,16 +91,16 @@
                                 <StackPanel Height="30" />
                                 <StackPanel Height="30">
                                     <TextBlock Height="30" Text="收入" HorizontalAlignment="Center" 
-                                       FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
+                                               FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
                                 </StackPanel>
 
                                 <ListView x:ConnectionId='27'                                                                
-                            IsItemClickEnabled="True"                                >
+                                          SelectionMode="None" IsItemClickEnabled="True"                                >
                                     <ListView.ItemTemplate>
                                         <DataTemplate                             >
                                             <Border x:ConnectionId='28'                             BorderThickness="1"  
-                                            HorizontalAlignment="Center" VerticalAlignment="Center"
-                                            Width="100" Height="30">
+                                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                    Width="100" Height="30">
                                                 <TextBlock x:ConnectionId='29' HorizontalAlignment="Center" VerticalAlignment="Center" 
                                                        Foreground="White" Width="80"                      
                                                        TextAlignment="Center"/>
