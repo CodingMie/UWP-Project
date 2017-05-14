@@ -11,7 +11,7 @@
 
     <Page.Resources>
         <Style x:Name="myTitle" TargetType="TextBlock">
-            <Setter Property="Foreground"  Value="CadetBlue"/>
+            <Setter Property="Foreground"  Value="DodgerBlue"/>
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="FontFamily" Value="Arial" />
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -20,7 +20,7 @@
     </Page.Resources>
 
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="DodgerBlue">
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
@@ -33,9 +33,12 @@
                         <AdaptiveTrigger MinWindowWidth="1"/>
                     </VisualState.StateTriggers>
                 </VisualState>
-                <VisualState x:Name="VisualStateMin800">
+                <VisualState x:Name="VisualStateMin900">
+                    <VisualState.Setters>
+                        <Setter Target="details_bottom.(UIElement.Visibility)" Value="Collapsed"/>
+                    </VisualState.Setters>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="800"/>
+                        <AdaptiveTrigger MinWindowWidth="900"/>
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>
@@ -44,121 +47,169 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
-        
-        <StackPanel x:Name="main" HorizontalAlignment="Center" Grid.Column="0">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" 
-                       Text="分类收支详情" Style = "{StaticResource myTitle}"/>
-            <ScrollViewer  Margin="0,0,0,0">
-                <StackPanel Orientation="Horizontal">
 
-                    <Border BorderBrush="LightSalmon" BorderThickness="1" Margin="10"  
-                            HorizontalAlignment="Center" VerticalAlignment="Top"
-                            Width="auto" Height="auto">
+        <ScrollViewer  x:Name="main" Margin="0,0,10,0">
+            <StackPanel HorizontalAlignment="Center" Grid.Column="0">
+                <StackPanel HorizontalAlignment="Center" Margin="15,10,10,10"
+                            Background="AliceBlue">
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" 
+                               Text="分类收支详情" Style = "{StaticResource myTitle}"/>
 
-                        <StackPanel Margin="5" Width="110">
+                    <StackPanel Orientation="Horizontal">
 
-                            <TextBlock HorizontalAlignment="Center" Text="Categories" Height="50"
-                                   Foreground="LightSalmon" FontSize="20" FontWeight="Bold"/>
+                        <Border BorderBrush="LightSalmon" BorderThickness="1" Margin="10"  
+                                HorizontalAlignment="Center" VerticalAlignment="Top"
+                                Width="auto" Height="auto">
 
-                            <StackPanel Height="50"/>
-                            <StackPanel Height="30">
-                                <TextBlock Height="30" Text="支出" HorizontalAlignment="Center" 
-                                       FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
-                            </StackPanel>
+                            <StackPanel Margin="5" Width="110">
 
-                            <ListView x:Name="ExpenseList" ItemsSource="{x:Bind categoryViewModel.AllExpenseCatagoryItems}"
-                            IsItemClickEnabled="True" ItemClick="categoryItemClicked">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate x:DataType="md:categoryItem">
-                                        <Border Background="{x:Bind color}" BorderThickness="1"  
-                                            HorizontalAlignment="Center" VerticalAlignment="Center"
-                                            Width="100" Height="30">
-                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                                   Foreground="White" Width="80" Text="{x:Bind name}" 
-                                                   TextAlignment="Center"/>
-                                        </Border>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
+                                <TextBlock HorizontalAlignment="Center" Text="Categories" Height="50"
+                                           Foreground="LightSalmon" FontSize="20" FontWeight="Bold"/>
+                                <StackPanel Height="30"/>
+                                <StackPanel Height="30">
+                                    <TextBlock Height="30" Text="支出" HorizontalAlignment="Center" 
+                                               FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
+                                </StackPanel>
 
-                            </ListView>
+                                <ListView x:Name="ExpenseList" ItemsSource="{x:Bind categoryViewModel.AllExpenseCatagoryItems}"
+                                          SelectionMode="None" IsItemClickEnabled="True" ItemClick="categoryItemClicked">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate x:DataType="md:categoryItem">
+                                            <Border Background="{x:Bind color}" BorderThickness="1"  
+                                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                    Width="100" Height="30">
+                                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                                           Foreground="White" Width="80" Text="{x:Bind name}" 
+                                                           TextAlignment="Center"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
 
-                            <StackPanel Height="30" />
-                            <StackPanel Height="30">
-                                <TextBlock Height="30" Text="收入" HorizontalAlignment="Center" 
-                                       FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
-                            </StackPanel>
+                                <StackPanel Height="30" />
+                                <StackPanel Height="30">
+                                    <TextBlock Height="30" Text="收入" HorizontalAlignment="Center" 
+                                               FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
+                                </StackPanel>
 
-                            <ListView ItemsSource="{x:Bind categoryViewModel.AllIncomeCatagoryItems}"
-                            IsItemClickEnabled="True" ItemClick="categoryItemClicked">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate x:DataType="md:categoryItem">
-                                        <Border Background="{x:Bind color}" BorderThickness="1"  
-                                            HorizontalAlignment="Center" VerticalAlignment="Center"
-                                            Width="100" Height="30">
-                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                <ListView ItemsSource="{x:Bind categoryViewModel.AllIncomeCatagoryItems}"
+                                          SelectionMode="None" IsItemClickEnabled="True" ItemClick="categoryItemClicked">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate x:DataType="md:categoryItem">
+                                            <Border Background="{x:Bind color}" BorderThickness="1"  
+                                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                    Width="100" Height="30">
+                                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
                                                        Foreground="White" Width="80" Text="{x:Bind name}" 
                                                        TextAlignment="Center"/>
-                                        </Border>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
 
-                            </ListView>
+                                </ListView>
+                                
+                            </StackPanel>
+                        </Border>
 
-
-                        </StackPanel>
-                    </Border>
-
-                    <Border BorderBrush="LightGreen" BorderThickness="1" Margin="10"  
+                        <Border BorderBrush="LightGreen" BorderThickness="1" Margin="10"  
                             HorizontalAlignment="Center" VerticalAlignment="Top"
                             Width="auto" Height="auto">
 
-                        <StackPanel Margin="5" Width="220" Height="400">
-                            <TextBlock HorizontalAlignment="Center" Text="Accounts" Height="50"
+                            <StackPanel Margin="5" Width="220" MinHeight="400">
+                                <TextBlock HorizontalAlignment="Center" Text="Accounts" Height="50"
                                    Foreground="LightGreen" FontSize="20" FontWeight="Bold"/>
 
-                            <ListView HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.DisplayItems}" 
+                                <ListView HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.DisplayItems}" 
                                       IsItemClickEnabled="True" ItemClick="accountItemClicked">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate x:DataType="md:accountItem">
-                                        <UserControl>
-                                            <UserControl.Resources>
-                                                <cv:AmountDisplayCvt x:Key="AmountDisplayCvt"/>
-                                                <cv:DateDisplayCvt x:Key="DateDisplayCvt"/>
-                                            </UserControl.Resources>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate x:DataType="md:accountItem">
+                                            <UserControl>
+                                                <UserControl.Resources>
+                                                    <cv:AmountDisplayCvt x:Key="AmountDisplayCvt"/>
+                                                    <cv:DateDisplayCvt x:Key="DateDisplayCvt"/>
+                                                </UserControl.Resources>
 
-                                            <Border BorderBrush="LightSeaGreen" BorderThickness="1" Margin="0,5"  
+                                                <Border BorderBrush="LightSeaGreen" BorderThickness="1" Margin="0,5"  
                                                     HorizontalAlignment="Center" VerticalAlignment="Top"
                                                     Width="190" Height="40">
-                                                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="105" />
-                                                        <ColumnDefinition Width="65" />
-                                                    </Grid.ColumnDefinitions>
-                                                    <TextBlock Grid.Column="0" Foreground="LightSeaGreen" HorizontalAlignment="Center" 
+                                                    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="105" />
+                                                            <ColumnDefinition Width="65" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" Foreground="LightSeaGreen" HorizontalAlignment="Center" 
                                                                Text="{Binding createDate, Converter={StaticResource DateDisplayCvt}}" />
-                                                    <TextBlock Grid.Column="1" Foreground="LightSeaGreen" HorizontalAlignment="Center" 
+                                                        <TextBlock Grid.Column="1" Foreground="LightSeaGreen" HorizontalAlignment="Center" 
                                                                Text="{Binding amount, Converter={StaticResource AmountDisplayCvt}}" />
-                                                </Grid>
-                                            </Border>
-                                        </UserControl>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                        </StackPanel>
-                    </Border>
+                                                    </Grid>
+                                                </Border>
+                                            </UserControl>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
                 </StackPanel>
-            </ScrollViewer>
-        </StackPanel>
-            
-        <StackPanel x:Name="details" HorizontalAlignment="Center" Width="300" Grid.Column="1">
-            <Grid>
+
+                <StackPanel x:Name="details_bottom" HorizontalAlignment="Center" Width="400" MinHeight="300" Grid.Column="1" Background="AliceBlue" Margin="15,10,10,10">
+                    <Grid Margin="30">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="详细信息" 
+                           Foreground="DodgerBlue" FontSize="20" Margin="20"/>
+                        <AppBarButton Icon="Setting" IsCompact="True" Margin="200,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <AppBarButton.Flyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="Edit" Click="edit_click"/>
+                                    <MenuFlyoutItem Text="Delete" Click="delete_click"/>
+                                </MenuFlyout>
+                            </AppBarButton.Flyout>
+                        </AppBarButton>
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition MinHeight="30"/>
+                                <RowDefinition MinHeight="30"/>
+                                <RowDefinition MinHeight="30"/>
+                                <RowDefinition MinHeight="30"/>
+                                <RowDefinition MinHeight="30"/>
+                                <RowDefinition MinHeight="30"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="类型：" Foreground="DodgerBlue"/>
+                            <TextBlock x:Name="category0" Grid.Row="0" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="金额：" Foreground="DodgerBlue"/>
+                            <TextBlock x:Name="amount0" Grid.Row="2" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="收入或支出：" Foreground="DodgerBlue" />
+                            <TextBlock x:Name="inOrOut0" Grid.Row="1" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="详情：" Foreground="DodgerBlue"/>
+                            <TextBlock x:Name="description0" Grid.Row="3" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="是否私房钱：" Foreground="DodgerBlue"/>
+                            <TextBlock x:Name ="isPocketMoney0" Grid.Row="4" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="日期：" Foreground="DodgerBlue"/>
+                            <TextBlock x:Name ="date0" Grid.Row="5" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+
+                        </Grid>
+                    </Grid>
+                </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel x:Name="details" HorizontalAlignment="Center" Width="400" MinHeight="300" Grid.Column="1" Background="AliceBlue" Margin="15,10,10,10">
+            <Grid Margin="30">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="详细信息" 
-                           Foreground="Teal" FontSize="20" Margin="20"/>
+                           Foreground="DodgerBlue" FontSize="20" Margin="20"/>
                 <AppBarButton Icon="Setting" IsCompact="True" Margin="200,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <AppBarButton.Flyout>
                         <MenuFlyout>
@@ -169,27 +220,30 @@
                 </AppBarButton>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition MinHeight="30"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="类型：" Foreground="CadetBlue"/>
-                    <TextBlock x:Name="category" Grid.Row="0" Grid.Column="1" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="金额：" Foreground="CadetBlue"/>
-                    <TextBlock x:Name="amount" Grid.Row="1" Grid.Column="1" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="收入：" Foreground="CadetBlue" />
-                    <TextBlock x:Name="inOrOut" Grid.Row="2" Grid.Column="1" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="详情：" Foreground="CadetBlue"/>
-                    <TextBlock x:Name="description" Grid.Row="3" Grid.Column="1" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="日期：" Foreground="CadetBlue"/>
-                    <TextBlock x:Name ="date" Grid.Row="4" Grid.Column="1" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="类型：" Foreground="DodgerBlue"/>
+                    <TextBlock x:Name="category" Grid.Row="0" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="金额：" Foreground="DodgerBlue"/>
+                    <TextBlock x:Name="amount" Grid.Row="2" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="收入或支出：" Foreground="DodgerBlue" />
+                    <TextBlock x:Name="inOrOut" Grid.Row="1" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="详情：" Foreground="DodgerBlue"/>
+                    <TextBlock x:Name="description" Grid.Row="3" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="是否私房钱：" Foreground="DodgerBlue"/>
+                    <TextBlock x:Name ="isPocketMoney" Grid.Row="4" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="日期：" Foreground="DodgerBlue"/>
+                    <TextBlock x:Name ="date" Grid.Row="5" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
 
                 </Grid>
             </Grid>

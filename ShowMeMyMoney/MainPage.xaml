@@ -19,166 +19,167 @@
 
     </Page.Resources>
     <Grid  Background="DodgerBlue">
-        <ScrollViewer Margin="0,0,10,0">
-            <StackPanel HorizontalAlignment="Center" Margin="15,10,10,10"
+        <StackPanel HorizontalAlignment="Center" Margin="15,10,10,10"
                     Background="AliceBlue">
-                <TextBlock Text="  Show Me My Money  " 
+
+            <TextBlock Text="  Show Me My Money  " 
                        HorizontalAlignment="Center"
+                      
                        Style="{StaticResource myTitle}"
                       ></TextBlock>
-                <!-- 本月总预算 -->
-                <Border BorderBrush="ForestGreen" BorderThickness="1" Margin="15"  
+            <!-- 本月总预算 -->
+            <Border BorderBrush="ForestGreen" BorderThickness="1" Margin="15"  
                                     HorizontalAlignment="Center"
                                   VerticalAlignment="Top"     Width="Auto" >
-                    <Grid x:Name="TotalBudgetItem" Width="400" Margin="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="本月预算" Foreground="ForestGreen"  Padding="5" FontSize="20"
+                <Grid x:Name="TotalBudgetItem" Width="400" Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="本月预算" Foreground="ForestGreen"  Padding="5" FontSize="20"
                       Grid.Column="0"   VerticalAlignment="Center" />
-                        <TextBlock Name="Budget" FontSize="20" VerticalAlignment="Center"
+                    <TextBlock FontSize="20" VerticalAlignment="Center"
                            Text="1500" Foreground="ForestGreen" Grid.Column="1" />
-                        <TextBlock x:Name="TotalBudgetProportion" FontSize="20" VerticalAlignment="Center"
+                    <TextBlock x:Name="TotalBudgetProportion" FontSize="20" VerticalAlignment="Center"
                            Text="已使用50%" Foreground="ForestGreen" Grid.Column="2" />
-                        <Image Name="pic" Source="Assets/pic1.jpg" Grid.Column="3"/>
-                        <Button Grid.Column="3" BorderBrush="{x:Null}" Width="100" Height="100"  Background="White" Opacity="0" Click="Button_Click"/>
-                       
-                    </Grid>
-                </Border>
+                    <Image Name="pic" Source="Assets/pic1.jpg" Grid.Column="3"/>
+                    <Button Grid.Column="3" BorderBrush="{x:Null}" Width="100" Height="100"  Background="White" Opacity="0" Click="Button_Click"/>
 
-                <!-- 开支展示区 -->
-                <Border BorderBrush="DodgerBlue" BorderThickness="1" Margin="15"  
+                </Grid>
+            </Border>
+            <!-- 开支展示区 -->
+            <Border BorderBrush="DodgerBlue" BorderThickness="1" Margin="15"  
                                     HorizontalAlignment="Center"
                                   VerticalAlignment="Top"     Width="Auto" >
-                    <Grid x:Name="TotalExpenseItem" Width="400" Margin="5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="总开支" Foreground="DodgerBlue"  Padding="5" FontSize="20"
+                <Grid x:Name="TotalExpenseItem" Width="400" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="总开支" Foreground="DodgerBlue"  Padding="5" FontSize="20"
                       Grid.Column="0"   VerticalAlignment="Center" />
-                        <TextBlock x:Name="TotalExpenseAmount"  FontSize="20" VerticalAlignment="Center"
+                    <TextBlock x:Name="TotalExpenseAmount"  FontSize="20" VerticalAlignment="Center"
                            Text="{x:Bind totalExpense}" Foreground="DodgerBlue" Grid.Column="1" />
-                    </Grid>
-                </Border>
+                </Grid>
+            </Border>
 
-                <!-- 私房钱 -->
+            <!-- 私房钱 -->
 
-                <Border BorderBrush="Orange" BorderThickness="1" Margin="15"  
+            <Border BorderBrush="Orange" BorderThickness="1" Margin="15"  
                                     HorizontalAlignment="Center"
                                   VerticalAlignment="Top"     Width="Auto" >
-                    <Grid x:Name="PocketMoneyItem" Width="400" Margin="3">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="私房钱" Foreground="Orange"  Padding="5" FontSize="20"
+                <Grid x:Name="PocketMoneyItem" Width="400" Margin="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="私房钱" Foreground="Orange"  Padding="5" FontSize="20"
                       Grid.Column="0"   VerticalAlignment="Center" />
 
-                        <TextBlock x:Name="PocketMoneyAmount" FontSize="20" VerticalAlignment="Center"
+                    <TextBlock x:Name="PocketMoneyAmount" FontSize="20" VerticalAlignment="Center"
                            Text="还剩800RMB" Foreground="Orange" Grid.Column="1" />
-                    </Grid>
-                </Border>
+                </Grid>
+            </Border>
 
 
-                <!-- 比例颜色条 -->
-                <StackPanel x:Name="shareBar" Orientation="Horizontal" Margin="10" Height="32" >
-                    <TextBlock/>
-                </StackPanel>
-                <Border x:Name="表头" BorderBrush="Black" BorderThickness="1" 
+            <!-- 比例颜色条 -->
+            <StackPanel x:Name="shareBar" Orientation="Horizontal" Margin="10" Height="32" >
+                <TextBlock/>
+            </StackPanel>
+            <Border x:Name="表头" BorderBrush="Black" BorderThickness="1" 
                                     HorizontalAlignment="Center"
                                   VerticalAlignment="Center"     Width="Auto" >
-                    <Grid   Width="400" >
-                        <Grid.ColumnDefinitions >
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="分类名" Foreground="Black"  Padding="5"
+                <Grid   Width="400" >
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="分类名" Foreground="Black"  Padding="5"
                               Grid.Column="0"   HorizontalAlignment="Center"      VerticalAlignment="Center"/>
-                        <TextBlock  Text="比例" Foreground="Black" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
-                        <TextBlock  Text="总额" Foreground="Black" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                    <TextBlock  Text="比例" Foreground="Black" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                    <TextBlock  Text="总额" Foreground="Black" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
 
-                    </Grid>
-                </Border>
-                <ListView ItemClick="ShowCategory_Click" IsItemClickEnabled="True" HorizontalAlignment="Center"
+                </Grid>
+            </Border>
+            <ListView ItemClick="ShowCategory_Click" IsItemClickEnabled="True" HorizontalAlignment="Center"
                 x:Name="expenseList"         ItemsSource="{x:Bind categoryViewModel.AllExpenseCatagoryItems, Mode=OneWay}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="md:categoryItem">
-                            <Border Background="{x:Bind color}" BorderThickness="1"  
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="md:categoryItem">
+                        <Border Background="{x:Bind color}" BorderThickness="1"  
                                     HorizontalAlignment="Center"
                                   VerticalAlignment="Center"      Width="Auto" Grid.Column="0">
-                                <Grid Width="400">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="1*" />
-                                        <ColumnDefinition Width="1*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{x:Bind name}" Foreground="White"
+                            <Grid Width="400">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{x:Bind name}" Foreground="White"
                                            Padding="5" HorizontalAlignment="Center"  FontWeight="ExtraBold"
                                        VerticalAlignment="Center"/>
-                                    <TextBlock  Text="{x:Bind share}"  Foreground="White" Grid.Column="1"  HorizontalAlignment="Center"  VerticalAlignment="Center" />
-                                    <TextBlock  Text="{x:Bind amount}"  Foreground="White" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center" />
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <!-- 收入展示区 -->
-                <Border BorderBrush="Pink" BorderThickness="1" Margin="15,0,15,15"  
+                                <TextBlock  Text="{x:Bind share}"  Foreground="White" Grid.Column="1"  HorizontalAlignment="Center"  VerticalAlignment="Center" />
+                                <TextBlock  Text="{x:Bind amount}"  Foreground="White" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <!-- 收入展示区 -->
+            <Border BorderBrush="Pink" BorderThickness="1" Margin="15,0,15,15"  
                                     HorizontalAlignment="Center"
                                   VerticalAlignment="Top"     Width="Auto" >
-                    <Grid x:Name="TotalIncomeItem" Width="400" Margin="5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="总收入" Foreground="Pink"  Padding="5" FontSize="20"
+                <Grid x:Name="TotalIncomeItem" Width="400" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="总收入" Foreground="Pink"  Padding="5" FontSize="20"
                       Grid.Column="0"   VerticalAlignment="Center" />
-                        <TextBlock x:Name="TotalIncomeAmount"  FontSize="20" VerticalAlignment="Center"
+                    <TextBlock x:Name="TotalIncomeAmount"  FontSize="20" VerticalAlignment="Center"
                            Text="0.0" Foreground="Pink" Grid.Column="1" />
-                    </Grid>
-                </Border>
-                <ListView ItemClick="ShowCategory_Click" IsItemClickEnabled="True" HorizontalAlignment="Center"
+                </Grid>
+            </Border>
+            <ListView ItemClick="ShowCategory_Click" IsItemClickEnabled="True" HorizontalAlignment="Center"
                 x:Name="incomeList"         ItemsSource="{x:Bind categoryViewModel.AllIncomeCatagoryItems, Mode=OneWay}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="md:categoryItem">
-                            <Border Background="{x:Bind color}" BorderThickness="1"  
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="md:categoryItem">
+                        <Border Background="{x:Bind color}" BorderThickness="1"  
                                     HorizontalAlignment="Center"
                                   VerticalAlignment="Center"      Width="Auto" Grid.Column="0">
-                                <Grid Width="400">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="1*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{x:Bind name}" Foreground="White"
+                            <Grid Width="400">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{x:Bind name}" Foreground="White"
                                            Padding="5" HorizontalAlignment="Center"  FontWeight="ExtraBold"
                                        VerticalAlignment="Center"/>
-                                    <TextBlock  Text="{x:Bind amount}"  Foreground="White" Grid.Column="1"  HorizontalAlignment="Center"  VerticalAlignment="Center" />
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <StackPanel Orientation="Horizontal">
-                    <AppBarButton x:Name="AddNewCategoryButton" Label="添加新分类"
+                                <TextBlock  Text="{x:Bind amount}"  Foreground="White" Grid.Column="1"  HorizontalAlignment="Center"  VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackPanel Orientation="Horizontal">
+                <AppBarButton x:Name="AddNewCategoryButton" Label="添加新分类"
                           Click="AddNewCategoryButton_Click"
                      Icon="Add" Width="117"></AppBarButton>
 
 
-                    <AppBarButton x:Name="AddNewAccountButton" Label="添加新记录"
+                <AppBarButton x:Name="AddNewAccountButton" Label="添加新记录"
                           Click="AddNewAccountButton_Click"
                      Icon="Add" Width="109"></AppBarButton>
-                     
                 <AppBarButton x:Name="viewStatisticsButton" Label="查看统计"
                           Click="viewStatisticsButton_Click"
-                              Icon="FourBars" Width="109"></AppBarButton>
-                </StackPanel>
+                              Icon="FourBars" Width="109">
+                    
+                </AppBarButton>
             </StackPanel>
-        </ScrollViewer>
+
+
+        </StackPanel>
 
         <ContentDialog x:Name="AddNewCategoryDialog" Title="添加新分类~\(≧▽≦)/~"
                        PrimaryButtonText="确认"
@@ -215,5 +216,6 @@
 
             </StackPanel>
         </ContentDialog>
+
     </Grid>
 </Page>

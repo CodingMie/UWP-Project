@@ -636,3 +636,13 @@ D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\NotificationsExt
 G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\bin\x86\Debug\NotificationsExtensions.Win10.dll
 G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\bin\x86\Debug\NotificationsExtensions.Win10.pdb
 G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\obj\x86\Debug\ShowMeMyMoney.csprojResolveAssemblyReference.cache
+G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\bin\x86\Debug\statistics.xbf
+G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\obj\x86\Debug\statistics.g.i.cs
+G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\obj\x86\Debug\statistics.g.cs
+G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\obj\x86\Debug\statistics.xaml
+G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\obj\x86\Debug\statistics.xbf
+D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\statistics.xbf
+D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\statistics.g.i.cs
+D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\statistics.g.cs
+D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\statistics.xaml
+D:\大二下\现操\期中\homework\ShowMeMyMoney\obj\x86\Debug\statistics.xbf
