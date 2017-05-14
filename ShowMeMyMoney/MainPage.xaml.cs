@@ -67,13 +67,27 @@ namespace ShowMeMyMoney
 
         }
 
+
         private void updateMetadataViews()
+
         {
             TotalExpenseAmount.Text = totalExpense.ToString();
             TotalIncomeAmount.Text = totalIncome.ToString();
             PocketMoneyAmount.Text = totalPocketMoney.ToString();
             TotalBudgetProportion.Text = "已使用" + totalExpense / monthlyBudget + "%";
-
+            if (totalExpense / monthlyBudget < 20)
+            {
+                pic.Source = new BitmapImage(new Uri("ms-appx:///Assets/pic3.jpg", UriKind.RelativeOrAbsolute));
+            }
+            else if (totalExpense / monthlyBudget < 50)
+            {
+                pic.Source = new BitmapImage(new Uri("ms-appx:///Assets/pic2.jpg", UriKind.RelativeOrAbsolute));
+            }
+            else
+            {
+                pic.Source = new BitmapImage(new Uri("ms-appx:///Assets/pic1.jpg", UriKind.RelativeOrAbsolute));
+            }
+            createTile();
         }
 
         /*------ metadata -----*/
