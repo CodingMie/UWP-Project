@@ -1,5 +1,6 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using ShowMeMyMoney.Model;
+using ShowMeMyMoney.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,47 +24,77 @@ namespace ShowMeMyMoney.ViewModel
         public ObservableCollection<categoryItem> AllIncomeCatagoryItems { get { return this.allIncomeCatagoryItems; } set { this.allIncomeCatagoryItems = value; } }
         public ObservableCollection<categoryItem> allIncomeCatagoryItems = new ObservableCollection<categoryItem>();
 
-        static bool  EXPENSE = false, INCOME = true;
+        private categoryItem selectedCategory = default(categoryItem);
+        public categoryItem SelectedCategory { get { return selectedCategory; } set { this.selectedCategory = value; } }
+
+        public CategoryTableManager CTM;
+
+        static bool EXPENSE = false, INCOME = true;
+
 
         public double pocketMoneyAmount;
 
         public categoryViewModel()
         {
-            /* 读入本地json文件 */
+            CTM = new CategoryTableManager();
+
             initializeCategoryTable();
             /* todo : 从本地读入私房钱数额 */
             pocketMoneyAmount = 800;
+
+            
         }
 
         private void initializeCategoryTable()
         {
+            /* 读入本地json文件 */
+            /*
             readFromTable("ExpenseCategoryTable");
             readFromTable("IncomeCategoryTable");
+            */
+
+            /* 从数据库读入 */
+            List<categoryItem> li = CTM.GetWholeTable();
+            foreach(var item in li)
+            {
+                if (item.inOrOut == EXPENSE)
+                {
+                    allExpenseCatagoryItems.Add(item);
+                } else
+                {
+                    allIncomeCatagoryItems.Add(item);
+                }
+            }
+
         }
 
-        public void AddCategoryItem(int index, string name, double _share, string color, bool b)
+        public void AddCategoryItem(long index, string name, double _share, string color, bool b)
         {
-            categoryItem categoryItem = new categoryItem(index, name, _share, color, b); 
+            categoryItem categoryItem = new categoryItem(index, name, _share, color, b);
             AddCategoryItem(categoryItem);
+            ///////////////////// DATABASE 
         }
         public void AddCategoryItem(categoryItem newCategory)
         {
             if (newCategory.inOrOut == EXPENSE)
             {
                 allExpenseCatagoryItems.Add(newCategory);
-            } else
+            }
+            else
             {
                 allIncomeCatagoryItems.Add(newCategory);
             }
-        }
 
-        public int getCategoryNum(string categoryName, bool expOrInc)
+
+            CTM.InsertIntoDatabase(newCategory);
+           // saveCategoryTable(newCategory.inOrOut);
+        }
+        public long getCategoryNum(string categoryName, bool expOrInc)
         {
             var items = expOrInc ? allIncomeCatagoryItems : allExpenseCatagoryItems;
             foreach (var item in items)
             {
                 if (item.name.Equals(categoryName))
-                    /* 要用.Equals判断才是判断内容  */
                 {
                     return item.number;
                 }
@@ -72,8 +103,8 @@ namespace ShowMeMyMoney.ViewModel
         }
         private async void readFromTable(string nameOfTable)
         {
-            try
-            {
+          //  try
+            //{
                 /*  读取json文件  */
                 var Folder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 var item = await Folder.TryGetItemAsync(nameOfTable + ".json");
@@ -81,7 +112,6 @@ namespace ShowMeMyMoney.ViewModel
                 {
                     /* 第一次打开应用, 则无需进行后续操作 */
                     /* 手动添加一个代表总开支的item */
-                   // allCatagoryItems.Add(new categoryItem(-1, "Total", 100, "Black"));
                     return;
                 }
                 var file = await Folder.GetFileAsync(nameOfTable + ".json");
@@ -106,29 +136,36 @@ namespace ShowMeMyMoney.ViewModel
                         foreach (var i in p)
                             allIncomeCatagoryItems.Add(i);
                     }
-                   
                 }
-                /* TODO:  去掉Total                */
-               
-            }
-            catch (Exception e)
+         //   }
+         /*   catch (Exception e)
             {
                 throw e;
-            }
+            }*/
         }
 
-        internal void UpdateCategoryByAccount(accountItem account)
+        internal void UpdateCategoryByAccount(accountItem account, bool addOrDel)
         {
             bool expenseOrIncome = account.inOrOut;
-            var items = expenseOrIncome ?  allIncomeCatagoryItems : allExpenseCatagoryItems;
+            var items = expenseOrIncome ? allIncomeCatagoryItems : allExpenseCatagoryItems;
             /* 如果是私房钱，不增加开支，只增加收入 */
             if (account.isPocketMoney == true && expenseOrIncome == EXPENSE) return;
             foreach (var i in items)
             {
                  if (account.category == i.number)
                 {
-                    i.amount += account.amount;
-                    saveCategoryTable(expenseOrIncome);
+                    if (addOrDel)
+                    {
+                        i.amount += account.amount;
+                    }
+                    else
+                    {
+                        i.amount -= account.amount;
+                    }
+                    // local file IO
+                   /* saveCategoryTable(expenseOrIncome);*/
+                    // DB 
+                    CTM.UpdateItemInDatabase(i);
                     return;
                 }
             }
@@ -139,7 +176,7 @@ namespace ShowMeMyMoney.ViewModel
         static string INCOME_TABLE = "IncomeCategoryTable";
         public async void saveCategoryTable(Boolean incomeOrExpense)
         {
-            string nameOfTable = incomeOrExpense? INCOME_TABLE: EXPENSE_TABLE;
+            string nameOfTable = incomeOrExpense ? INCOME_TABLE : EXPENSE_TABLE;
             ObservableCollection<categoryItem> table = incomeOrExpense ? allIncomeCatagoryItems : allExpenseCatagoryItems;
             try
             {
@@ -149,7 +186,6 @@ namespace ShowMeMyMoney.ViewModel
 
                 using (StreamWriter r = new StreamWriter(data))
                 {
-                      
                     var serelizedfile = JsonConvert.SerializeObject(table);
                     r.Write(serelizedfile);
                 }

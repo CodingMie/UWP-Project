@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using ShowMeMyMoney.Model;
 using System;
 using System.Collections;
@@ -19,6 +19,14 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
+
+using Windows.UI.Notifications;
+using NotificationsExtensions.Tiles;
+using NotificationsExtensions;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Storage;
+using System.Text.RegularExpressions;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -41,20 +49,46 @@ namespace ShowMeMyMoney
             remainedProportion = 100;
             makeColorPicker();
             initializeShareSlider();
-            initializeShareBar(); 
-            
-            
+            initializeShareBar();
+            createTile();
+            DataTransferManager DataTrans = DataTransferManager.GetForCurrentView();
+            DataTrans.DataRequested += OnShareDataRequested;
+        }
 
+        async void OnShareDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            var dp = args.Request.Data;
+            var deferral = args.Request.GetDeferral();
+            string uri = "ms-appx://" + ((BitmapImage)pic.Source).UriSource.LocalPath;
+            var img = await StorageFile.GetFileFromApplicationUriAsync(new Uri(uri));
+            dp.Properties.Title = "【紧急求助】";
+            dp.SetText("本月" + TotalBudgetProportion.Text + "," + totalExpense + "元，" + "\nFrom ShowMeMyMoney");
+            dp.SetStorageItems(new List<StorageFile> { img });
+            deferral.Complete();
 
         }
 
+
         private void updateMetadataViews()
+
         {
             TotalExpenseAmount.Text = totalExpense.ToString();
             TotalIncomeAmount.Text = totalIncome.ToString();
             PocketMoneyAmount.Text = totalPocketMoney.ToString();
-            TotalBudgetProportion.Text = "已使用" + totalExpense/monthlyBudget + "%";
-
+            TotalBudgetProportion.Text = "已使用" + Math.Truncate(totalExpense / monthlyBudget * 100) + "%";
+            if (totalExpense / monthlyBudget < 20)
+            {
+                pic.Source = new BitmapImage(new Uri("ms-appx:///Assets/pic3.jpg", UriKind.RelativeOrAbsolute));
+            }
+            else if (totalExpense / monthlyBudget < 50)
+            {
+                pic.Source = new BitmapImage(new Uri("ms-appx:///Assets/pic2.jpg", UriKind.RelativeOrAbsolute));
+            }
+            else
+            {
+                pic.Source = new BitmapImage(new Uri("ms-appx:///Assets/pic1.jpg", UriKind.RelativeOrAbsolute));
+            }
+            createTile();
         }
 
         /*------ metadata -----*/
@@ -83,6 +117,8 @@ namespace ShowMeMyMoney
             writeMetadataToFile();
             updateMetadataViews();
         }
+
+
         private async void readMetadataFromFile()
         {
             try
@@ -116,9 +152,9 @@ namespace ShowMeMyMoney
                     Dictionary<string, double> p = JsonConvert.DeserializeObject<Dictionary<string, double>>(text);
                     metadata = p;
 
-                   totalExpense = metadata["totalExpense"];
-                    totalIncome =  metadata["totalIncome"]  ;
-                    totalPocketMoney =  metadata["totalPocketMoney"]  ;
+                    totalExpense = metadata["totalExpense"];
+                    totalIncome = metadata["totalIncome"];
+                    totalPocketMoney = metadata["totalPocketMoney"];
                     monthlyBudget = metadata["monthlyBudget"];
 
 
@@ -133,7 +169,7 @@ namespace ShowMeMyMoney
                 throw e;
             }
         }
-
+        
         private async void writeMetadataToFile()
         {
             try
@@ -189,7 +225,7 @@ namespace ShowMeMyMoney
 
             if (e.Parameter == null)
             {
-               
+
             }
             if (e.Parameter != null)
             {
@@ -208,7 +244,7 @@ namespace ShowMeMyMoney
                 accountViewModel.SelectedItem = null;
 
 
-                
+
             }
 
             /* 希望只读一次 */
@@ -216,15 +252,22 @@ namespace ShowMeMyMoney
             {
                 readMetadataFromFile();
             }
+            DataTransferManager DataTrans = DataTransferManager.GetForCurrentView();
+            DataTrans.DataRequested += OnShareDataRequested;
         }
-
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            DataTransferManager DataTrans = DataTransferManager.GetForCurrentView();
+            DataTrans.DataRequested -= OnShareDataRequested;
+        }
 
 
         private void ShowCategory_Click(object sender, ItemClickEventArgs e)
         {
             /* 将分类item发送到accountsListViewPage */
             categoryItem citem = ((categoryItem)(e.ClickedItem));
-            Frame.Navigate(typeof(AccountsListViewPage), citem);
+            categoryViewModel.SelectedCategory = citem;
+            Frame.Navigate(typeof(AccountsListViewPage), categoryViewModel);
         }
 
 
@@ -234,28 +277,17 @@ namespace ShowMeMyMoney
         {
             ContentDialog dialog = AddNewCategoryDialog;
             shareSlider.Header = "# 所占预算比例，还剩" + remainedProportion + "%可用";
+            expenseButton.IsChecked = false;
+            incomeButton.IsChecked = false;
+            categoryName.Text = "";
+            shareSlider.Value = 0;
+            ColorPallete_Combo.SelectedIndex = -1;
+
             await dialog.ShowAsync();
         }
 
         private async void AddNewCategoryDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            /*
-            if (remainedProportion < Convert.ToDouble(categoryShare.Text))
-            {
-               //  /* 判断新添加的分类比例是否合法 
-                AddNewCategoryDialog.Hide();
-                ContentDialog alert = new ContentDialog()
-                {
-                    Title = "错误提示",
-                    Content = "新设置的比例太大啦！只剩" + remainedProportion + "%可用。",
-                    IsPrimaryButtonEnabled = true,
-                    PrimaryButtonText = "OK"
-
-                };
-                await alert.ShowAsync();
-                return;
-            } 
-        */
             /* 确定收入还是支出 */
 
             bool incomeOrExpense = incomeButton.IsChecked == true ? true : false;
@@ -298,7 +330,8 @@ namespace ShowMeMyMoney
             /* 添加新分类 */
             categoryViewModel.AddCategoryItem(newCategory);
             categoryCount++;
-            categoryViewModel.saveCategoryTable(incomeOrExpense);
+
+
             AddNewCategoryDialog.Hide();
         }
 
@@ -343,10 +376,53 @@ namespace ShowMeMyMoney
         {
             /* 好像不需要干嘛 */
         }
+        private void viewStatisticsButton_Click(object sender, RoutedEventArgs e)
+        {
+            /* 跳转到统计页 */
+            Frame.Navigate(typeof(statistics));
+        }
 
         private void initializeShareSlider()
         {
             shareSlider.Maximum = remainedProportion;
+        }
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (Regex.IsMatch(newAmount.Text, @"^(-?\d+)(\.\d+)?$"))
+            {
+                BudgetAmount.Text = newAmount.Text;
+                monthlyBudget = Double.Parse(BudgetAmount.Text);
+                writeMetadataToFile();
+                updateMetadataViews();
+                BudgetFlyout.Hide();
+                newAmount.Text = "";
+            }
+        }
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (Regex.IsMatch(PocketAmount.Text, @"^(-?\d+)(\.\d+)?$"))
+            {
+                PocketMoneyAmount.Text = PocketAmount.Text;
+                totalPocketMoney = Double.Parse(PocketMoneyAmount.Text);
+                writeMetadataToFile();
+                updateMetadataViews();
+                PocketMoneyFlyout.Hide();
+                PocketAmount.Text = "";
+            }
+        }
+        private void cancl_Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            newAmount.Text = "";
+            BudgetFlyout.Hide();
+        }
+        private void cancl_Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            PocketAmount.Text = "";
+            PocketMoneyFlyout.Hide();
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DataTransferManager.ShowShareUI();
         }
 
         private void out_Checked(object sender, RoutedEventArgs e)
@@ -358,6 +434,136 @@ namespace ShowMeMyMoney
         {
             shareSlider.Visibility = Visibility.Collapsed;
         }
+
+        //  创建磁贴
+        public void createTile()
+        {
+            string from = (monthlyBudget + totalIncome - totalExpense).ToString();
+            string subject = "本月余额";
+            string body = "点此来记账";
+            string picSource = ((BitmapImage)pic.Source).UriSource.LocalPath;
+            picSource = picSource.Substring(1);
+
+
+            // Construct the tile content
+            TileContent content = new TileContent()
+            {
+                Visual = new TileVisual()
+                {
+                    TileMedium = new TileBinding()
+                    {
+                        Content = new TileBindingContentAdaptive()
+                        {
+                            PeekImage = new TilePeekImage()
+                            {
+                                Source = picSource
+                            },
+                            Children =
+                            {
+                                new AdaptiveText()
+                                {
+                                    Text = subject,
+                                               HintStyle = AdaptiveTextStyle.SubtitleSubtle,
+                HintAlign = AdaptiveTextAlign.Center
+                                },
+                                new AdaptiveText()
+                                {
+                                    Text = from,
+                                                    HintStyle = AdaptiveTextStyle.Title,
+                HintAlign = AdaptiveTextAlign.Center
+                                },
+
+
+                                new AdaptiveText()
+                                {
+                                    Text = body,
+                                    HintStyle = AdaptiveTextStyle.CaptionSubtle,
+                HintAlign = AdaptiveTextAlign.Center
+                                }
+                            }
+                        }
+                    },
+
+                    TileWide = new TileBinding()
+                    {
+                        Content = new TileBindingContentAdaptive()
+                        {
+                            Children =
+                            {
+                                new AdaptiveText()
+                                {
+                                    Text = subject,
+                                               HintStyle = AdaptiveTextStyle.SubtitleSubtle,
+                HintAlign = AdaptiveTextAlign.Center
+                                },
+                                new AdaptiveText()
+                                {
+                                    Text = from,
+                                                    HintStyle = AdaptiveTextStyle.Title,
+                HintAlign = AdaptiveTextAlign.Center
+                                },
+
+                                new AdaptiveText()
+                                {
+                                    Text = body,
+                                    HintStyle = AdaptiveTextStyle.CaptionSubtle,
+                HintAlign = AdaptiveTextAlign.Center
+                                }
+                            }
+                        }
+                    },
+                    TileLarge = new TileBinding()
+                    {
+                        Content = new TileBindingContentAdaptive()
+                        {
+                            TextStacking = TileTextStacking.Center,
+                            Children =
+        {
+            new AdaptiveGroup()
+            {
+                Children =
+                {
+                    new AdaptiveSubgroup() { HintWeight = 1 },
+                    new AdaptiveSubgroup()
+                    {
+                        HintWeight = 2,
+                        Children =
+                        {
+                            new AdaptiveImage()
+                            {
+                                Source = picSource,
+                                HintCrop = AdaptiveImageCrop.Circle
+                            }
+                        }
+                    },
+                    new AdaptiveSubgroup() { HintWeight = 1 }
+                }
+            },
+            new AdaptiveText()
+            {
+                Text = from,
+                HintStyle = AdaptiveTextStyle.Title,
+                HintAlign = AdaptiveTextAlign.Center
+            },
+            new AdaptiveText()
+            {
+                Text = body,
+                HintStyle = AdaptiveTextStyle.SubtitleSubtle,
+                HintAlign = AdaptiveTextAlign.Center
+            }
+        }
+                        }
+                    }
+                }
+            };
+
+            //TileUpdateManager.CreateTileUpdaterForApplication().Clear();
+            var notification = new TileNotification(content.GetXml());
+            // And send the notification
+            TileUpdateManager.CreateTileUpdaterForApplication().Update(notification);
+
+        }
+
     }
 
 }

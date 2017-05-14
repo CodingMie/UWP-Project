@@ -2,6 +2,7 @@ using ShowMeMyMoney.Model;
 using SQLitePCL;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,10 +52,11 @@ namespace ShowMeMyMoney.Services
                     todostmt.Bind(2, item.amount);
                     todostmt.Bind(3, item.createDate.ToString());
                     todostmt.Bind(4, item.category);
-                    todostmt.Bind(5, item.isPocketMoney);
-                    todostmt.Bind(6, item.inOrOut);
+                    todostmt.Bind(5, Convert.ToInt16(item.isPocketMoney));
+                    todostmt.Bind(6, Convert.ToInt16(item.inOrOut));
                     todostmt.Bind(7, item.description);
                     var a = todostmt.Step();
+                    var b = 1;
                 }
             }
             catch (Exception ex)
@@ -72,7 +74,7 @@ namespace ShowMeMyMoney.Services
             }
         }
         // QUERY BY categoryNumber
-        public List<accountItem> SearchDatabaseById(int numberOfCategory)
+        public List<accountItem> SearchDatabaseById(long numberOfCategory)
         {
             var dbconn = App.conn;
             List<accountItem> li = new List<accountItem>();
@@ -82,15 +84,19 @@ namespace ShowMeMyMoney.Services
 
                 while (statement.Step() == SQLiteResult.ROW)
                 {
-                    accountItem i = new accountItem();
+                    accountItem i = new accountItem((string)statement[0]);
 
 
+/*<<<<<<< HEAD
                     int k = 0;
+=======*/
+                    int k = 1;
+//>>>>>> 714ed49f59e4e0edee427eaacafa0d48b29c3316
                     i.amount = (double)statement[k++];
                     i.createDate = DateTimeOffset.Parse((string)statement[k++]);
-                    i.category = (int)statement[k++];
-                    i.isPocketMoney = (bool)statement[k++];
-                    i.inOrOut = (bool)statement[k++];
+                    i.category = (long)statement[k++];
+                    i.isPocketMoney = ((long)statement[k++] == 0)?false:true;
+                    i.inOrOut = ((long)statement[k++] == 0) ? false : true;
                     i.description = (string)statement[k++];
 
 
@@ -100,6 +106,37 @@ namespace ShowMeMyMoney.Services
             return li;
 
 
+        }
+
+        public ObservableCollection<accountItem> LoadAllItems()
+        {
+            var dbconn = App.conn;
+            ObservableCollection<accountItem> li = new ObservableCollection<accountItem>();
+            using (var statement = dbconn.Prepare("SELECT * FROM accounts"))
+            {
+
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    accountItem i = new accountItem((string)statement[0]);
+
+
+                    /*<<<<<<< HEAD
+                                        int k = 0;
+                    =======*/
+                    int k = 1;
+                    //>>>>>> 714ed49f59e4e0edee427eaacafa0d48b29c3316
+                    i.amount = (double)statement[k++];
+                    i.createDate = DateTimeOffset.Parse((string)statement[k++]);
+                    i.category = (long)statement[k++];
+                    i.isPocketMoney = ((long)statement[k++] == 0) ? false : true;
+                    i.inOrOut = ((long)statement[k++] == 0) ? false : true;
+                    i.description = (string)statement[k++];
+
+
+                    li.Add(i);
+                }
+            }
+            return li;
         }
     }
 }
