@@ -11,7 +11,7 @@
 
     <Page.Resources>
         <Style x:ConnectionId='2' x:Name="myTitle" TargetType="TextBlock">
-            <Setter Property="Foreground"  Value="CadetBlue"/>
+            <Setter Property="Foreground"  Value="DodgerBlue"/>
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="FontFamily" Value="Arial" />
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -20,7 +20,7 @@
     </Page.Resources>
 
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="DodgerBlue">
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:ConnectionId='3' x:Name="VisualStateGroup">
@@ -33,9 +33,12 @@
                         <AdaptiveTrigger MinWindowWidth="1"/>
                     </VisualState.StateTriggers>
                 </VisualState>
-                <VisualState x:ConnectionId='5' x:Name="VisualStateMin800">
+                <VisualState x:ConnectionId='5' x:Name="VisualStateMin900">
+                    <VisualState.Setters>
+                        <Setter Target="details_bottom.(UIElement.Visibility)" Value="Collapsed"/>
+                    </VisualState.Setters>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="800"/>
+                        <AdaptiveTrigger MinWindowWidth="900"/>
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>
@@ -44,152 +47,203 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
-        
-        <StackPanel x:ConnectionId='6' x:Name="main" HorizontalAlignment="Center" Grid.Column="0">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" 
-                       Text="分类收支详情" Style = "{StaticResource myTitle}"/>
-            <ScrollViewer  Margin="0,0,0,0">
-                <StackPanel Orientation="Horizontal">
 
-                    <Border BorderBrush="LightSalmon" BorderThickness="1" Margin="10"  
-                            HorizontalAlignment="Center" VerticalAlignment="Top"
-                            Width="auto" Height="auto">
+        <ScrollViewer x:ConnectionId='6'  x:Name="main" Margin="0,0,10,0">
+            <StackPanel HorizontalAlignment="Center" Grid.Column="0">
+                <StackPanel HorizontalAlignment="Center" Margin="15,10,10,10"
+                            Background="AliceBlue">
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" 
+                               Text="分类收支详情" Style = "{StaticResource myTitle}"/>
 
-                        <StackPanel Margin="5" Width="110">
+                    <StackPanel Orientation="Horizontal">
 
-                            <TextBlock HorizontalAlignment="Center" Text="Categories" Height="50"
-                                   Foreground="LightSalmon" FontSize="20" FontWeight="Bold"/>
+                        <Border BorderBrush="LightSalmon" BorderThickness="1" Margin="10"  
+                                HorizontalAlignment="Center" VerticalAlignment="Top"
+                                Width="auto" Height="auto">
 
-                            <StackPanel Height="50"/>
-                            <StackPanel Height="30">
-                                <TextBlock Height="30" Text="支出" HorizontalAlignment="Center" 
-                                       FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
-                            </StackPanel>
+                            <StackPanel Margin="5" Width="110">
 
-                            <ListView x:ConnectionId='16' x:Name="ExpenseList"                                                                 
-                            IsItemClickEnabled="True"                                >
-                                <ListView.ItemTemplate>
-                                    <DataTemplate                             >
-                                        <Border x:ConnectionId='20'                             BorderThickness="1"  
-                                            HorizontalAlignment="Center" VerticalAlignment="Center"
-                                            Width="100" Height="30">
-                                            <TextBlock x:ConnectionId='21' HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                                   Foreground="White" Width="80"                      
-                                                   TextAlignment="Center"/>
-                                        </Border>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
+                                <TextBlock HorizontalAlignment="Center" Text="Categories" Height="50"
+                                           Foreground="LightSalmon" FontSize="20" FontWeight="Bold"/>
+                                <StackPanel Height="30"/>
+                                <StackPanel Height="30">
+                                    <TextBlock Height="30" Text="支出" HorizontalAlignment="Center" 
+                                               FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
+                                </StackPanel>
 
-                            </ListView>
+                                <ListView x:ConnectionId='26' x:Name="ExpenseList"                                                                 
+                                          SelectionMode="None" IsItemClickEnabled="True"                                >
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate                             >
+                                            <Border x:ConnectionId='30'                             BorderThickness="1"  
+                                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                    Width="100" Height="30">
+                                                <TextBlock x:ConnectionId='31' HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                                           Foreground="White" Width="80"                      
+                                                           TextAlignment="Center"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
 
-                            <StackPanel Height="30" />
-                            <StackPanel Height="30">
-                                <TextBlock Height="30" Text="收入" HorizontalAlignment="Center" 
-                                       FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
-                            </StackPanel>
+                                <StackPanel Height="30" />
+                                <StackPanel Height="30">
+                                    <TextBlock Height="30" Text="收入" HorizontalAlignment="Center" 
+                                               FontSize="18" Foreground="LightSalmon" FontWeight="SemiBold"/>
+                                </StackPanel>
 
-                            <ListView x:ConnectionId='17'                                                                
-                            IsItemClickEnabled="True"                                >
-                                <ListView.ItemTemplate>
-                                    <DataTemplate                             >
-                                        <Border x:ConnectionId='18'                             BorderThickness="1"  
-                                            HorizontalAlignment="Center" VerticalAlignment="Center"
-                                            Width="100" Height="30">
-                                            <TextBlock x:ConnectionId='19' HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                <ListView x:ConnectionId='27'                                                                
+                                          SelectionMode="None" IsItemClickEnabled="True"                                >
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate                             >
+                                            <Border x:ConnectionId='28'                             BorderThickness="1"  
+                                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                    Width="100" Height="30">
+                                                <TextBlock x:ConnectionId='29' HorizontalAlignment="Center" VerticalAlignment="Center" 
                                                        Foreground="White" Width="80"                      
                                                        TextAlignment="Center"/>
-                                        </Border>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
 
-                            </ListView>
+                                </ListView>
+                                
+                            </StackPanel>
+                        </Border>
 
-
-                        </StackPanel>
-                    </Border>
-
-                    <Border BorderBrush="LightGreen" BorderThickness="1" Margin="10"  
+                        <Border BorderBrush="LightGreen" BorderThickness="1" Margin="10"  
                             HorizontalAlignment="Center" VerticalAlignment="Top"
                             Width="auto" Height="auto">
 
-                        <StackPanel Margin="5" Width="220" Height="400">
-                            <TextBlock HorizontalAlignment="Center" Text="Accounts" Height="50"
+                            <StackPanel Margin="5" Width="220" MinHeight="400">
+                                <TextBlock HorizontalAlignment="Center" Text="Accounts" Height="50"
                                    Foreground="LightGreen" FontSize="20" FontWeight="Bold"/>
 
-                            <ListView x:ConnectionId='15' HorizontalAlignment="Center"                                               
+                                <ListView x:ConnectionId='25' HorizontalAlignment="Center"                                               
                                       IsItemClickEnabled="True"                               >
-                                <ListView.ItemTemplate>
-                                    <DataTemplate                            >
-                                        <UserControl>
-                                            <UserControl.Resources>
-                                                <cv:AmountDisplayCvt x:Key="AmountDisplayCvt"/>
-                                                <cv:DateDisplayCvt x:Key="DateDisplayCvt"/>
-                                            </UserControl.Resources>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate                            >
+                                            <UserControl>
+                                                <UserControl.Resources>
+                                                    <cv:AmountDisplayCvt x:Key="AmountDisplayCvt"/>
+                                                    <cv:DateDisplayCvt x:Key="DateDisplayCvt"/>
+                                                </UserControl.Resources>
 
-                                            <Border BorderBrush="LightSeaGreen" BorderThickness="1" Margin="0,5"  
+                                                <Border BorderBrush="LightSeaGreen" BorderThickness="1" Margin="0,5"  
                                                     HorizontalAlignment="Center" VerticalAlignment="Top"
                                                     Width="190" Height="40">
-                                                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="105" />
-                                                        <ColumnDefinition Width="65" />
-                                                    </Grid.ColumnDefinitions>
-                                                    <TextBlock Grid.Column="0" Foreground="LightSeaGreen" HorizontalAlignment="Center" 
+                                                    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="105" />
+                                                            <ColumnDefinition Width="65" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" Foreground="LightSeaGreen" HorizontalAlignment="Center" 
                                                                Text="{Binding createDate, Converter={StaticResource DateDisplayCvt}}" />
-                                                    <TextBlock Grid.Column="1" Foreground="LightSeaGreen" HorizontalAlignment="Center" 
+                                                        <TextBlock Grid.Column="1" Foreground="LightSeaGreen" HorizontalAlignment="Center" 
                                                                Text="{Binding amount, Converter={StaticResource AmountDisplayCvt}}" />
-                                                </Grid>
-                                            </Border>
-                                        </UserControl>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                        </StackPanel>
-                    </Border>
+                                                    </Grid>
+                                                </Border>
+                                            </UserControl>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
                 </StackPanel>
-            </ScrollViewer>
-        </StackPanel>
-            
-        <StackPanel x:ConnectionId='7' x:Name="details" HorizontalAlignment="Center" Width="300" Grid.Column="1">
-            <Grid>
+
+                <StackPanel x:ConnectionId='16' x:Name="details_bottom" HorizontalAlignment="Center" Width="400" MinHeight="300" Grid.Column="1" Background="AliceBlue" Margin="15,10,10,10">
+                    <Grid Margin="30">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="详细信息" 
+                           Foreground="DodgerBlue" FontSize="20" Margin="20"/>
+                        <AppBarButton Icon="Setting" IsCompact="True" Margin="200,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <AppBarButton.Flyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem x:ConnectionId='23' Text="Edit"                   />
+                                    <MenuFlyoutItem x:ConnectionId='24' Text="Delete"                     />
+                                </MenuFlyout>
+                            </AppBarButton.Flyout>
+                        </AppBarButton>
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition MinHeight="30"/>
+                                <RowDefinition MinHeight="30"/>
+                                <RowDefinition MinHeight="30"/>
+                                <RowDefinition MinHeight="30"/>
+                                <RowDefinition MinHeight="30"/>
+                                <RowDefinition MinHeight="30"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="类型：" Foreground="DodgerBlue"/>
+                            <TextBlock x:ConnectionId='17' x:Name="category0" Grid.Row="0" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="金额：" Foreground="DodgerBlue"/>
+                            <TextBlock x:ConnectionId='18' x:Name="amount0" Grid.Row="2" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="收入或支出：" Foreground="DodgerBlue" />
+                            <TextBlock x:ConnectionId='19' x:Name="inOrOut0" Grid.Row="1" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="详情：" Foreground="DodgerBlue"/>
+                            <TextBlock x:ConnectionId='20' x:Name="description0" Grid.Row="3" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="是否私房钱：" Foreground="DodgerBlue"/>
+                            <TextBlock x:ConnectionId='21' x:Name ="isPocketMoney0" Grid.Row="4" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="日期：" Foreground="DodgerBlue"/>
+                            <TextBlock x:ConnectionId='22' x:Name ="date0" Grid.Row="5" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+
+                        </Grid>
+                    </Grid>
+                </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel x:ConnectionId='7' x:Name="details" HorizontalAlignment="Center" Width="400" MinHeight="300" Grid.Column="1" Background="AliceBlue" Margin="15,10,10,10">
+            <Grid Margin="30">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="详细信息" 
-                           Foreground="Teal" FontSize="20" Margin="20"/>
+                           Foreground="DodgerBlue" FontSize="20" Margin="20"/>
                 <AppBarButton Icon="Setting" IsCompact="True" Margin="200,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <AppBarButton.Flyout>
                         <MenuFlyout>
-                            <MenuFlyoutItem x:ConnectionId='13' Text="Edit"                   />
-                            <MenuFlyoutItem x:ConnectionId='14' Text="Delete"                     />
+                            <MenuFlyoutItem x:ConnectionId='14' Text="Edit"                   />
+                            <MenuFlyoutItem x:ConnectionId='15' Text="Delete"                     />
                         </MenuFlyout>
                     </AppBarButton.Flyout>
                 </AppBarButton>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition MinHeight="30"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="类型：" Foreground="CadetBlue"/>
-                    <TextBlock x:ConnectionId='8' x:Name="category" Grid.Row="0" Grid.Column="1" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="金额：" Foreground="CadetBlue"/>
-                    <TextBlock x:ConnectionId='9' x:Name="amount" Grid.Row="1" Grid.Column="1" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="收入：" Foreground="CadetBlue" />
-                    <TextBlock x:ConnectionId='10' x:Name="inOrOut" Grid.Row="2" Grid.Column="1" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="详情：" Foreground="CadetBlue"/>
-                    <TextBlock x:ConnectionId='11' x:Name="description" Grid.Row="3" Grid.Column="1" Foreground="LightSeaGreen"/>
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="日期：" Foreground="CadetBlue"/>
-                    <TextBlock x:ConnectionId='12' x:Name ="date" Grid.Row="4" Grid.Column="1" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="类型：" Foreground="DodgerBlue"/>
+                    <TextBlock x:ConnectionId='8' x:Name="category" Grid.Row="0" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="金额：" Foreground="DodgerBlue"/>
+                    <TextBlock x:ConnectionId='9' x:Name="amount" Grid.Row="2" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="收入或支出：" Foreground="DodgerBlue" />
+                    <TextBlock x:ConnectionId='10' x:Name="inOrOut" Grid.Row="1" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="详情：" Foreground="DodgerBlue"/>
+                    <TextBlock x:ConnectionId='11' x:Name="description" Grid.Row="3" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="是否私房钱：" Foreground="DodgerBlue"/>
+                    <TextBlock x:ConnectionId='12' x:Name ="isPocketMoney" Grid.Row="4" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="日期：" Foreground="DodgerBlue"/>
+                    <TextBlock x:ConnectionId='13' x:Name ="date" Grid.Row="5" Grid.Column="1" TextWrapping = "Wrap" Foreground="LightSeaGreen"/>
 
                 </Grid>
             </Grid>

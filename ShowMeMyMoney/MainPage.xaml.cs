@@ -40,6 +40,9 @@ namespace ShowMeMyMoney
         {
             monthlyBudget = 1500;
             this.InitializeComponent();
+
+
+
             this.accountViewModel = new ViewModel.ViewModel();
             this.categoryViewModel = new ViewModel.categoryViewModel();
             remainedProportion = 100;
@@ -63,23 +66,14 @@ namespace ShowMeMyMoney
             deferral.Complete();
 
         }
+
         private void updateMetadataViews()
         {
             TotalExpenseAmount.Text = totalExpense.ToString();
             TotalIncomeAmount.Text = totalIncome.ToString();
             PocketMoneyAmount.Text = totalPocketMoney.ToString();
-            TotalBudgetProportion.Text = "已使用" + totalExpense/monthlyBudget + "%";
-            if (totalExpense/monthlyBudget < 20)
-            {
-                pic.Source = new BitmapImage(new Uri("ms-appx:///Assets/pic3.jpg", UriKind.RelativeOrAbsolute));
-            } else if (totalExpense / monthlyBudget < 50)
-            {
-                pic.Source = new BitmapImage(new Uri("ms-appx:///Assets/pic2.jpg", UriKind.RelativeOrAbsolute));
-            } else
-            {
-                pic.Source = new BitmapImage(new Uri("ms-appx:///Assets/pic1.jpg", UriKind.RelativeOrAbsolute));
-            }
-            createTile();
+            TotalBudgetProportion.Text = "已使用" + totalExpense / monthlyBudget + "%";
+
         }
 
         /*------ metadata -----*/
@@ -95,6 +89,7 @@ namespace ShowMeMyMoney
             {
                 remainedProportion -= item.share;
                 totalExpense += item.amount;
+
             }
             foreach (var item in categoryViewModel.allIncomeCatagoryItems)
             {
@@ -139,13 +134,11 @@ namespace ShowMeMyMoney
                     /* 将json文件中的东西反序列化，加入到metadata   */
                     Dictionary<string, double> p = JsonConvert.DeserializeObject<Dictionary<string, double>>(text);
                     metadata = p;
-                    if (metadata != null)
-                    {
-                        totalExpense = metadata["totalExpense"];
-                        totalIncome = metadata["totalIncome"];
-                        totalPocketMoney = metadata["totalPocketMoney"];
-                        monthlyBudget = metadata["monthlyBudget"];
-                    }
+
+                    totalExpense = metadata["totalExpense"];
+                    totalIncome = metadata["totalIncome"];
+                    totalPocketMoney = metadata["totalPocketMoney"];
+                    monthlyBudget = metadata["monthlyBudget"];
 
 
 
@@ -172,6 +165,7 @@ namespace ShowMeMyMoney
                 metadata["totalIncome"] = totalIncome;
                 metadata["totalPocketMoney"] = totalPocketMoney;
                 metadata["monthlyBudget"] = monthlyBudget;
+
                 using (StreamWriter r = new StreamWriter(data))
                 {
 
@@ -231,6 +225,9 @@ namespace ShowMeMyMoney
                     maintainMetadata();
                 }
                 accountViewModel.SelectedItem = null;
+
+
+
             }
 
             /* 希望只读一次 */
@@ -344,6 +341,7 @@ namespace ShowMeMyMoney
                 ColorPallete_Combo.Items.Add(item);
             }
 
+
         }
         private void ColorPalleteCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -365,6 +363,7 @@ namespace ShowMeMyMoney
             /* 跳转到统计页 */
             Frame.Navigate(typeof(statistics));
         }
+
         private void initializeShareSlider()
         {
             shareSlider.Maximum = remainedProportion;
@@ -515,8 +514,5 @@ namespace ShowMeMyMoney
         }
 
     }
+
 }
-
-
-/*                    
-*/

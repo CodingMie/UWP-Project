@@ -53,7 +53,6 @@
                 <Line x:Name="l2" X1="0" Y1="120" X2="370" Y2="120" Stroke="LightPink" StrokeThickness="1"></Line>
                 <Line x:Name="l3" X1="0" Y1="160" X2="370" Y2="160" Stroke="LightPink" StrokeThickness="1"></Line>
                 <Rectangle></Rectangle>-->
-                
                 <!--支出
                 <Line x:Name="mon1" X1="10" X2="10" Y1="200"  Y2="196" Stroke="CadetBlue" StrokeThickness="10" ></Line>
                 <Line x:Name="mon2" X1="40" X2="40" Y1="200" Y2="190" Stroke="CadetBlue" StrokeThickness="10" ></Line>
