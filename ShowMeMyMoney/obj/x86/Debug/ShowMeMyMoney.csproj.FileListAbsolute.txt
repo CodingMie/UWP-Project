@@ -635,3 +635,4 @@ D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\NotificationsExt
 D:\大二下\现操\期中\homework\ShowMeMyMoney\bin\x86\Debug\NotificationsExtensions.Win10.pdb
 G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\bin\x86\Debug\NotificationsExtensions.Win10.dll
 G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\bin\x86\Debug\NotificationsExtensions.Win10.pdb
+G:\作业\现操\期中\project\UWP-Project\ShowMeMyMoney\obj\x86\Debug\ShowMeMyMoney.csprojResolveAssemblyReference.cache

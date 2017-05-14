@@ -29,19 +29,18 @@ namespace ShowMeMyMoney
     {
         public AccountsListViewPage()
         {
-            this.Accounts = new ObservableCollection<accountItem>();
             this.ViewModel = new ViewModel.ViewModel();
             this.InitializeComponent();
             var viewTitleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;
             viewTitleBar.BackgroundColor = Windows.UI.Colors.CornflowerBlue;
             viewTitleBar.ButtonBackgroundColor = Windows.UI.Colors.CornflowerBlue;
-           // ExpenseList.Items.Add();
+            // ExpenseList.Items.Add();
+            
         }
         public ViewModel.ViewModel ViewModel;
 
         ViewModel.categoryViewModel categoryViewModel { get; set; }
-
-        ObservableCollection<accountItem> Accounts;
+        
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -52,7 +51,7 @@ namespace ShowMeMyMoney
             if (e.Parameter.GetType() == typeof(categoryViewModel))
             {
                 this.categoryViewModel = (categoryViewModel)(e.Parameter);
-                ViewModel.getItemsFromDB(categoryViewModel.SelectedCategory);
+                ViewModel.queryDisplayItems(categoryViewModel.SelectedCategory);
             }
 
             Frame rootFrame = Window.Current.Content as Frame;
@@ -74,7 +73,8 @@ namespace ShowMeMyMoney
         private void categoryItemClicked(object sender, ItemClickEventArgs e)
         {
             categoryViewModel.SelectedCategory = (categoryItem)(e.ClickedItem);
-            ViewModel.getItemsFromDB(categoryViewModel.SelectedCategory);
+            ViewModel.queryDisplayItems(categoryViewModel.SelectedCategory);
+            this.InitializeComponent();
         }
         
         private void accountItemClicked(object sender, ItemClickEventArgs e)
@@ -103,13 +103,16 @@ namespace ShowMeMyMoney
         //delete the item
         private void delete_click(object sender, RoutedEventArgs e)
         {
-            ViewModel.RemoveAccountItem(ViewModel.SelectedItem.id);
-            ViewModel.SelectedItem = null;
-            category.Text = "";
-            amount.Text = "";
-            inOrOut.Text = "";
-            description.Text = "";
-            date.Text = "";
+            if (ViewModel.SelectedItem != null)
+            {
+                ViewModel.RemoveAccountItem(ViewModel.SelectedItem.id);
+                ViewModel.SelectedItem = null;
+                category.Text = "";
+                amount.Text = "";
+                inOrOut.Text = "";
+                description.Text = "";
+                date.Text = "";
+            }
         }
         
     }
