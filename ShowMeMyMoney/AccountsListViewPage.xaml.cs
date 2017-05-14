@@ -80,11 +80,11 @@ namespace ShowMeMyMoney
         private void accountItemClicked(object sender, ItemClickEventArgs e)
         {
             ViewModel.SelectedItem = (accountItem)(e.ClickedItem);
-            category.Text = categoryViewModel.SelectedCategory.name;
-            amount.Text = ViewModel.SelectedItem.amount + "元";
-            inOrOut.Text = (ViewModel.SelectedItem.inOrOut) ? "收入" : "支出";
-            description.Text = ViewModel.SelectedItem.description;
-            date.Text = ViewModel.SelectedItem.createDate.Year + "年"
+            category.Text = category0.Text = categoryViewModel.SelectedCategory.name;
+            amount.Text = amount0.Text = ViewModel.SelectedItem.amount + "元";
+            inOrOut.Text = inOrOut0.Text = (ViewModel.SelectedItem.inOrOut) ? "收入" : "支出";
+            description.Text = description0.Text = ViewModel.SelectedItem.description;
+            date.Text = date0.Text = ViewModel.SelectedItem.createDate.Year + "年"
                     + ViewModel.SelectedItem.createDate.Month + "月"
                     + ViewModel.SelectedItem.createDate.Day + "日";
         }
